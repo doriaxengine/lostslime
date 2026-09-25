@@ -27,6 +27,12 @@ bool GameState::levelCompleteRequested = false;
 bool GameState::gameOverRequested = false;
 bool GameState::resumeRequested = false;
 bool GameState::respawnRequested = false;
+bool GameState::pauseRequested = false;
+
+bool GameState::touchLeft = false;
+bool GameState::touchRight = false;
+bool GameState::touchDown = false;
+bool GameState::touchJump = false;
 
 std::string GameState::loadingTitle;
 
@@ -44,6 +50,7 @@ void GameState::newGame(){
     gameOverRequested = false;
     resumeRequested = false;
     respawnRequested = false;
+    pauseRequested = false;
 }
 
 void GameState::configureTransitions(){
@@ -90,6 +97,7 @@ void GameState::beginLevel(const std::string& sceneName, const std::string& disp
     gameOverRequested = false;
     resumeRequested = false;
     respawnRequested = false;
+    pauseRequested = false;
 }
 
 void playSound(Scene* scene, const std::string& name){

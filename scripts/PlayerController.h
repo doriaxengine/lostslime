@@ -87,6 +87,7 @@ private:
     doriax::Entity dustEmitter = NULL_ENTITY;
     bool dead = false;
     bool jumpHeld = false;
+    bool touchJump = false;
     bool jumpCutApplied = true;
     float coyoteTimer = 0.0f;
     float jumpBufferTimer = 0.0f;

@@ -159,6 +159,11 @@ void LevelController::onUpdate() {
         if (GameState::paused) setPaused(false);
     }
 
+    if (GameState::pauseRequested) {
+        GameState::pauseRequested = false;
+        if (!GameState::paused && transitionTimer < 0.0f) setPaused(true);
+    }
+
     if (GameState::respawnRequested) {
         GameState::respawnRequested = false;
         PlayerController* hero = findScript<PlayerController>(scene, heroEntity, "PlayerController");

@@ -17,6 +17,9 @@ Open the folder in Doriax Editor and press **Play** on `Intro Scene`.
 | Esc / P, gamepad Start | Pause |
 | Enter, gamepad A | Menu confirm |
 
+On phones and tablets the level shows on-screen buttons instead. They also appear after
+touching the screen on any device, and hide again when a key is pressed.
+
 ## Project
 
 - `Intro Scene`, `Game Over Scene`, `Win Scene`: menus.
@@ -31,6 +34,6 @@ The best score is saved with `System::setIntegerForKey`.
 ## Credits
 
 Art, fonts and sound effects are CC0 assets by [Kenney](https://kenney.nl): New Platformer
-Pack, UI Pack and Kenney Fonts. Their licenses are in `assets/licenses/`.
+Pack, UI Pack, Mobile Controls and Kenney Fonts. Their licenses are in `assets/licenses/`.
 
 The music and the dust particle were made for this game and are CC0 as well.

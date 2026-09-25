@@ -72,6 +72,27 @@ cppScripts:
       - name: levelText
         isPtr: true
         ptrTypeName: doriax::Text
+  - path: scripts/TouchControls.cpp
+    headerPath: scripts/TouchControls.h
+    className: TouchControls
+    properties:
+      - name: left
+        isPtr: true
+        ptrTypeName: doriax::Image
+      - name: right
+        isPtr: true
+        ptrTypeName: doriax::Image
+      - name: down
+        isPtr: true
+        ptrTypeName: doriax::Image
+      - name: jump
+        isPtr: true
+        ptrTypeName: doriax::Image
+      - name: pause
+        isPtr: true
+        ptrTypeName: doriax::Image
+      - name: touchMargin
+        isPtr: false
 entities:
   - type: Entity
     entity: 1001
@@ -875,3 +896,717 @@ entities:
         fixedHeight: false
         pivotBaseline: false
         pivotCentered: false
+  - type: Entity
+    entity: 1040
+    name: Touch Controls
+    components:
+      script:
+        scripts:
+          - type: cpp
+            path: scripts/TouchControls.cpp
+            headerPath: scripts/TouchControls.h
+            className: TouchControls
+            enabled: true
+            properties:
+              - name: left
+                displayName: Left
+                type: EntityReference
+                ptrTypeName: doriax::Image
+                value: 1041
+                defaultValue: 0
+              - name: right
+                displayName: Right
+                type: EntityReference
+                ptrTypeName: doriax::Image
+                value: 1042
+                defaultValue: 0
+              - name: down
+                displayName: Down
+                type: EntityReference
+                ptrTypeName: doriax::Image
+                value: 1043
+                defaultValue: 0
+              - name: jump
+                displayName: Jump
+                type: EntityReference
+                ptrTypeName: doriax::Image
+                value: 1044
+                defaultValue: 0
+              - name: pause
+                displayName: Pause
+                type: EntityReference
+                ptrTypeName: doriax::Image
+                value: 1046
+                defaultValue: 0
+              - name: touchMargin
+                displayName: Touch Margin
+                type: Float
+                value: 12
+                defaultValue: 12
+  - type: Entity
+    entity: 1041
+    name: Touch Left
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/touch/direction_left.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [1, 1, 1, 0.5]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 128
+        height: 128
+        anchorPointLeft: 0
+        anchorPointTop: 1
+        anchorPointRight: 0
+        anchorPointBottom: 1
+        anchorOffsetLeft: 0
+        anchorOffsetTop: -128
+        anchorOffsetRight: 128
+        anchorOffsetBottom: 0
+        positionOffset: [28, -28]
+        anchorPreset: BOTTOM_LEFT
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      image:
+        patchMarginLeft: 0
+        patchMarginRight: 0
+        patchMarginTop: 0
+        patchMarginBottom: 0
+        textureScaleFactor: 0
+  - type: Entity
+    entity: 1042
+    name: Touch Right
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/touch/direction_right.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [1, 1, 1, 0.5]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 128
+        height: 128
+        anchorPointLeft: 0
+        anchorPointTop: 1
+        anchorPointRight: 0
+        anchorPointBottom: 1
+        anchorOffsetLeft: 0
+        anchorOffsetTop: -128
+        anchorOffsetRight: 128
+        anchorOffsetBottom: 0
+        positionOffset: [176, -28]
+        anchorPreset: BOTTOM_LEFT
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      image:
+        patchMarginLeft: 0
+        patchMarginRight: 0
+        patchMarginTop: 0
+        patchMarginBottom: 0
+        textureScaleFactor: 0
+  - type: Entity
+    entity: 1043
+    name: Touch Down
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/touch/dpad_element_south.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [1, 1, 1, 0.5]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 104
+        height: 104
+        anchorPointLeft: 0
+        anchorPointTop: 1
+        anchorPointRight: 0
+        anchorPointBottom: 1
+        anchorOffsetLeft: 0
+        anchorOffsetTop: -104
+        anchorOffsetRight: 104
+        anchorOffsetBottom: 0
+        positionOffset: [114, -176]
+        anchorPreset: BOTTOM_LEFT
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      image:
+        patchMarginLeft: 0
+        patchMarginRight: 0
+        patchMarginTop: 0
+        patchMarginBottom: 0
+        textureScaleFactor: 0
+  - type: Entity
+    entity: 1044
+    name: Touch Jump
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/touch/button_circle.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [1, 1, 1, 0.5]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 144
+        height: 144
+        anchorPointLeft: 1
+        anchorPointTop: 1
+        anchorPointRight: 1
+        anchorPointBottom: 1
+        anchorOffsetLeft: -144
+        anchorOffsetTop: -144
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [-36, -36]
+        anchorPreset: BOTTOM_RIGHT
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      image:
+        patchMarginLeft: 0
+        patchMarginRight: 0
+        patchMarginTop: 0
+        patchMarginBottom: 0
+        textureScaleFactor: 0
+    children:
+      - type: Entity
+        entity: 1045
+        name: Jump Icon
+        components:
+          transform:
+            position: [0, 0, 0]
+            rotation: [1, 0, 0, 0]
+            scale: [1, 1, 1]
+            worldPosition: [0, 0, 0]
+            worldRotation: [1, 0, 0, 0]
+            worldScale: [1, 1, 1]
+            localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            visible: true
+            billboardRotation: [1, 0, 0, 0]
+            billboard: false
+            fakeBillboard: false
+            cylindricalBillboard: false
+          ui:
+            buffer:
+              type: vertex_buffer
+              usage: immutable
+              stride: 0
+              size: 0
+              count: 0
+              renderAttributes: true
+              instanceBuffer: false
+              attributes: ~
+            indices:
+              type: index_buffer
+              usage: immutable
+              stride: 2
+              size: 0
+              count: 0
+              renderAttributes: true
+              instanceBuffer: false
+              attributes:
+                - type: index
+                  dataType: unsigned_short
+                  bufferName: ""
+                  elements: 1
+                  offset: 0
+                  count: 0
+                  normalized: true
+                  perInstance: false
+            minBufferCount: 0
+            minIndicesCount: 0
+            primitiveType: triangles
+            vertexCount: 0
+            aabb:
+              min: [0, 0, 0]
+              max: [0, 0, 0]
+            worldAABB:
+              min: [0, 0, 0]
+              max: [0, 0, 0]
+            texture:
+              textureType: 2D
+              source: path
+              path: ui/touch/icon_jump.png
+              minFilter: linear
+              magFilter: linear
+              wrapU: clamp_to_edge
+              wrapV: clamp_to_edge
+              releaseDataAfterLoad: true
+            color: [1, 1, 1, 1]
+            automaticFlipY: true
+            flipY: false
+            pointerMoved: false
+            focused: false
+          uilayout:
+            width: 72
+            height: 72
+            anchorPointLeft: 0.5
+            anchorPointTop: 0.5
+            anchorPointRight: 0.5
+            anchorPointBottom: 0.5
+            anchorOffsetLeft: -36
+            anchorOffsetTop: -36
+            anchorOffsetRight: 36
+            anchorOffsetBottom: 36
+            positionOffset: [0, 0]
+            anchorPreset: CENTER
+            usingAnchors: true
+            panel: 0
+            containerBoxIndex: -1
+            scissor: [0, 0, 0, 0]
+            ignoreScissor: false
+            ignoreEvents: true
+          image:
+            patchMarginLeft: 0
+            patchMarginRight: 0
+            patchMarginTop: 0
+            patchMarginBottom: 0
+            textureScaleFactor: 0
+  - type: Entity
+    entity: 1046
+    name: Touch Pause
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/touch/button_circle.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [1, 1, 1, 0.5]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 72
+        height: 72
+        anchorPointLeft: 1
+        anchorPointTop: 0
+        anchorPointRight: 1
+        anchorPointBottom: 0
+        anchorOffsetLeft: -72
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 72
+        positionOffset: [-16, 80]
+        anchorPreset: TOP_RIGHT
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      image:
+        patchMarginLeft: 0
+        patchMarginRight: 0
+        patchMarginTop: 0
+        patchMarginBottom: 0
+        textureScaleFactor: 0
+    children:
+      - type: Entity
+        entity: 1047
+        name: Pause Icon
+        components:
+          transform:
+            position: [0, 0, 0]
+            rotation: [1, 0, 0, 0]
+            scale: [1, 1, 1]
+            worldPosition: [0, 0, 0]
+            worldRotation: [1, 0, 0, 0]
+            worldScale: [1, 1, 1]
+            localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            visible: true
+            billboardRotation: [1, 0, 0, 0]
+            billboard: false
+            fakeBillboard: false
+            cylindricalBillboard: false
+          ui:
+            buffer:
+              type: vertex_buffer
+              usage: immutable
+              stride: 0
+              size: 0
+              count: 0
+              renderAttributes: true
+              instanceBuffer: false
+              attributes: ~
+            indices:
+              type: index_buffer
+              usage: immutable
+              stride: 2
+              size: 0
+              count: 0
+              renderAttributes: true
+              instanceBuffer: false
+              attributes:
+                - type: index
+                  dataType: unsigned_short
+                  bufferName: ""
+                  elements: 1
+                  offset: 0
+                  count: 0
+                  normalized: true
+                  perInstance: false
+            minBufferCount: 0
+            minIndicesCount: 0
+            primitiveType: triangles
+            vertexCount: 0
+            aabb:
+              min: [0, 0, 0]
+              max: [0, 0, 0]
+            worldAABB:
+              min: [0, 0, 0]
+              max: [0, 0, 0]
+            texture:
+              textureType: 2D
+              source: path
+              path: ui/touch/icon_pause.png
+              minFilter: linear
+              magFilter: linear
+              wrapU: clamp_to_edge
+              wrapV: clamp_to_edge
+              releaseDataAfterLoad: true
+            color: [1, 1, 1, 1]
+            automaticFlipY: true
+            flipY: false
+            pointerMoved: false
+            focused: false
+          uilayout:
+            width: 36
+            height: 36
+            anchorPointLeft: 0.5
+            anchorPointTop: 0.5
+            anchorPointRight: 0.5
+            anchorPointBottom: 0.5
+            anchorOffsetLeft: -18
+            anchorOffsetTop: -18
+            anchorOffsetRight: 18
+            anchorOffsetBottom: 18
+            positionOffset: [0, 0]
+            anchorPreset: CENTER
+            usingAnchors: true
+            panel: 0
+            containerBoxIndex: -1
+            scissor: [0, 0, 0, 0]
+            ignoreScissor: false
+            ignoreEvents: true
+          image:
+            patchMarginLeft: 0
+            patchMarginRight: 0
+            patchMarginTop: 0
+            patchMarginBottom: 0
+            textureScaleFactor: 0

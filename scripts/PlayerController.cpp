@@ -177,9 +177,9 @@ void PlayerController::onFixedUpdate() {
     }
 
     float direction = 0.0f;
-    if (Input::isKeyPressed(D_KEY_LEFT) || Input::isKeyPressed(D_KEY_A)) direction -= 1.0f;
-    if (Input::isKeyPressed(D_KEY_RIGHT) || Input::isKeyPressed(D_KEY_D)) direction += 1.0f;
-    downHeld = Input::isKeyPressed(D_KEY_DOWN) || Input::isKeyPressed(D_KEY_S);
+    if (Input::isKeyPressed(D_KEY_LEFT) || Input::isKeyPressed(D_KEY_A) || GameState::touchLeft) direction -= 1.0f;
+    if (Input::isKeyPressed(D_KEY_RIGHT) || Input::isKeyPressed(D_KEY_D) || GameState::touchRight) direction += 1.0f;
+    downHeld = Input::isKeyPressed(D_KEY_DOWN) || Input::isKeyPressed(D_KEY_S) || GameState::touchDown;
 
     if (Input::numGamepads() > 0) {
         int gamepadId = Input::getGamepadId(0);
@@ -260,7 +260,8 @@ void PlayerController::onFixedUpdate() {
 
 // costs a heart and respawns the hero
 void PlayerController::fallOut() {
-    if (dead) return;
+    // several physics steps can run before the respawn happens on the next update
+    if (dead || GameState::respawnRequested) return;
     GameState::lives = std::max(0, GameState::lives - 1);
     if (GameState::lives <= 0) {
         die();
@@ -283,6 +284,15 @@ void PlayerController::applyFrame(const std::string& name) {
 
 void PlayerController::onUpdate() {
     if (GameState::paused) return;
+
+    if (GameState::touchJump != touchJump) {
+        touchJump = GameState::touchJump;
+        if (touchJump) {
+            requestJump();
+        } else {
+            jumpHeld = false;
+        }
+    }
 
     float dt = Engine::getDeltatime();
 

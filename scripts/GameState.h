@@ -35,6 +35,13 @@ struct GameState {
     static bool gameOverRequested;
     static bool resumeRequested;
     static bool respawnRequested;
+    static bool pauseRequested;
+
+    // on-screen buttons held, set by TouchControls
+    static bool touchLeft;
+    static bool touchRight;
+    static bool touchDown;
+    static bool touchJump;
 
     static std::string loadingTitle;
 
