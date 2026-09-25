@@ -1,0 +1,1082 @@
+id: 5
+name: Win Scene
+scene:
+  backgroundColor: [0.1, 0.1, 0.15, 1]
+  shadowQuality: low
+  meshLodEnabled: true
+  meshLodThreshold: 1
+  depthPrepassEnabled: false
+  lightState: off
+  globalIlluminationIntensity: 0.1
+  globalIlluminationColor: [1, 1, 1]
+  ambientLight2DIntensity: 1
+  ambientLight2DColor: [1, 1, 1]
+  shadow2DQuality: low
+  ssaoEnabled: false
+  ssaoRadius: 0.5
+  ssaoIntensity: 1
+  ssaoBias: 0.025
+  ssrEnabled: false
+  ssrMaxDistance: 8
+  ssrThickness: 0.5
+  ssrMaxSteps: 48
+  ssrIntensity: 1
+  ssrBlur: 0
+  gravity2D: [0, -9.81]
+  gravity3D: [0, -9.81, 0]
+  fixedResolutionEnabled: false
+  fixedResolutionWidth: 640
+  fixedResolutionHeight: 360
+  fixedResolutionFilter: nearest
+  enableUIEvents: not_set
+sceneType: scene_ui
+mainCamera: 0
+maxValues:
+  maxSubmeshes: 0
+  maxTilemapTilesRect: 0
+  maxTilemapTiles: 0
+  maxExternalBuffers: 0
+  maxSpriteFrames: 0
+  maxBones: 0
+shaderKeys:
+  - type: ui
+    properties: 2
+  - type: ui
+    properties: 8
+  - type: ui
+    properties: 9
+  - type: blit
+cppScripts:
+  - path: scripts/MenuController.cpp
+    headerPath: scripts/MenuController.h
+    className: MenuController
+    properties:
+      - name: primaryAction
+        isPtr: false
+      - name: primaryScene
+        isPtr: false
+      - name: escapeAction
+        isPtr: false
+      - name: escapeScene
+        isPtr: false
+      - name: scoreText
+        isPtr: true
+        ptrTypeName: doriax::Text
+      - name: scorePrefix
+        isPtr: false
+  - path: scripts/MenuButton.cpp
+    headerPath: scripts/MenuButton.h
+    className: MenuButton
+    properties:
+      - name: action
+        isPtr: false
+      - name: targetScene
+        isPtr: false
+bundles:
+  - bundles/Sounds.bundle
+entities:
+  - type: Entity
+    entity: 1001
+    name: Menu
+    components:
+      script:
+        scripts:
+          - type: cpp
+            path: scripts/MenuController.cpp
+            headerPath: scripts/MenuController.h
+            className: MenuController
+            enabled: true
+            properties:
+              - name: primaryAction
+                displayName: Primary Action
+                type: String
+                value: play
+                defaultValue: play
+              - name: primaryScene
+                displayName: Primary Scene
+                type: String
+                value: Level One
+                defaultValue: Level One
+              - name: escapeAction
+                displayName: Escape Action
+                type: String
+                value: menu
+                defaultValue: ""
+              - name: escapeScene
+                displayName: Escape Scene
+                type: String
+                value: Intro Scene
+                defaultValue: Intro Scene
+              - name: scoreText
+                displayName: Score Text
+                type: EntityReference
+                ptrTypeName: doriax::Text
+                value: 1030
+                defaultValue: 0
+              - name: scorePrefix
+                displayName: Score Prefix
+                type: String
+                value: "Score: "
+                defaultValue: "Score: "
+  - type: Entity
+    entity: 1002
+    name: Sounds
+    components:
+      bundle:
+        name: Sounds
+        path: bundles/Sounds.bundle
+  - type: Entity
+    entity: 1010
+    name: Background
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/menu_background.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [0.55, 0.55, 0.6, 1]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 1280
+        height: 720
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [0, 0]
+        anchorPreset: FULL_LAYOUT
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      image:
+        patchMarginLeft: 0
+        patchMarginRight: 0
+        patchMarginTop: 0
+        patchMarginBottom: 0
+        textureScaleFactor: 0
+  - type: Entity
+    entity: 1011
+    name: Dim
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture: ~
+        color: [0, 0, 0, 0.2]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 1280
+        height: 720
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [0, 0]
+        anchorPreset: FULL_LAYOUT
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      image:
+        patchMarginLeft: 0
+        patchMarginRight: 0
+        patchMarginTop: 0
+        patchMarginBottom: 0
+        textureScaleFactor: 0
+  - type: Entity
+    entity: 1012
+    name: Panel
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/panel_grey.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [1, 1, 1, 1]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 620
+        height: 420
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [0, 0]
+        anchorPreset: CENTER
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      image:
+        patchMarginLeft: 14
+        patchMarginRight: 14
+        patchMarginTop: 14
+        patchMarginBottom: 14
+        textureScaleFactor: 0
+  - type: Entity
+    entity: 1020
+    name: Title
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture: ~
+        color: [0.15, 0.6, 0.3, 1]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 0
+        height: 0
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [0, -130]
+        anchorPreset: CENTER
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      text:
+        font: [fonts/KenneyFuture.ttf]
+        text: YOU WIN!
+        fontSize: 64
+        multiline: false
+        maxTextSize: 64
+        fixedWidth: false
+        fixedHeight: false
+        pivotBaseline: false
+        pivotCentered: false
+  - type: Entity
+    entity: 1030
+    name: Score
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture: ~
+        color: [0.16, 0.2, 0.3, 1]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 0
+        height: 0
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [0, -55]
+        anchorPreset: CENTER
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      text:
+        font: [fonts/KenneyFutureNarrow.ttf]
+        text: "Score: 0"
+        fontSize: 34
+        multiline: false
+        maxTextSize: 64
+        fixedWidth: false
+        fixedHeight: false
+        pivotBaseline: false
+        pivotCentered: false
+  - type: Entity
+    entity: 1040
+    name: PLAY AGAIN Button
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/button_green.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [1, 1, 1, 1]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      button:
+        label: 1041
+        textureNormal:
+          textureType: 2D
+          source: path
+          path: ui/button_green.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        textureHovered:
+          textureType: 2D
+          source: path
+          path: ui/button_green.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        texturePressed:
+          textureType: 2D
+          source: path
+          path: ui/button_green.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        textureDisabled:
+          textureType: 2D
+          source: path
+          path: ui/button_green.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        colorNormal: [1, 1, 1, 1]
+        colorHovered: [0.9, 0.95, 1, 1]
+        colorPressed: [0.75, 0.8, 0.85, 1]
+        colorDisabled: [0.5, 0.5, 0.5, 1]
+        disabled: false
+      uilayout:
+        width: 300
+        height: 76
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [0, 30]
+        anchorPreset: CENTER
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: false
+      image:
+        patchMarginLeft: 12
+        patchMarginRight: 12
+        patchMarginTop: 12
+        patchMarginBottom: 16
+        textureScaleFactor: 0
+      script:
+        scripts:
+          - type: cpp
+            path: scripts/MenuButton.cpp
+            headerPath: scripts/MenuButton.h
+            className: MenuButton
+            enabled: true
+            properties:
+              - name: action
+                displayName: Action
+                type: String
+                value: play
+                defaultValue: play
+              - name: targetScene
+                displayName: Target Scene
+                type: String
+                value: Level One
+                defaultValue: Level One
+    children:
+      - type: Entity
+        entity: 1041
+        name: Label
+        components:
+          transform:
+            position: [0, 0, 0]
+            rotation: [1, 0, 0, 0]
+            scale: [1, 1, 1]
+            worldPosition: [0, 0, 0]
+            worldRotation: [1, 0, 0, 0]
+            worldScale: [1, 1, 1]
+            localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            visible: true
+            billboardRotation: [1, 0, 0, 0]
+            billboard: false
+            fakeBillboard: false
+            cylindricalBillboard: false
+          ui:
+            buffer:
+              type: vertex_buffer
+              usage: immutable
+              stride: 0
+              size: 0
+              count: 0
+              renderAttributes: true
+              instanceBuffer: false
+              attributes: ~
+            indices:
+              type: index_buffer
+              usage: immutable
+              stride: 2
+              size: 0
+              count: 0
+              renderAttributes: true
+              instanceBuffer: false
+              attributes:
+                - type: index
+                  dataType: unsigned_short
+                  bufferName: ""
+                  elements: 1
+                  offset: 0
+                  count: 0
+                  normalized: true
+                  perInstance: false
+            minBufferCount: 0
+            minIndicesCount: 0
+            primitiveType: triangles
+            vertexCount: 0
+            aabb:
+              min: [0, 0, 0]
+              max: [0, 0, 0]
+            worldAABB:
+              min: [0, 0, 0]
+              max: [0, 0, 0]
+            texture: ~
+            color: [1, 1, 1, 1]
+            automaticFlipY: true
+            flipY: false
+            pointerMoved: false
+            focused: false
+          uilayout:
+            width: 0
+            height: 0
+            anchorPointLeft: 0
+            anchorPointTop: 0
+            anchorPointRight: 0
+            anchorPointBottom: 0
+            anchorOffsetLeft: 0
+            anchorOffsetTop: 0
+            anchorOffsetRight: 0
+            anchorOffsetBottom: 0
+            positionOffset: [0, -4]
+            anchorPreset: CENTER
+            usingAnchors: true
+            panel: 0
+            containerBoxIndex: -1
+            scissor: [0, 0, 0, 0]
+            ignoreScissor: false
+            ignoreEvents: true
+          text:
+            font: [fonts/KenneyFuture.ttf]
+            text: PLAY AGAIN
+            fontSize: 34
+            multiline: false
+            maxTextSize: 64
+            fixedWidth: false
+            fixedHeight: false
+            pivotBaseline: false
+            pivotCentered: false
+  - type: Entity
+    entity: 1050
+    name: MAIN MENU Button
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/button_grey.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [1, 1, 1, 1]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      button:
+        label: 1051
+        textureNormal:
+          textureType: 2D
+          source: path
+          path: ui/button_grey.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        textureHovered:
+          textureType: 2D
+          source: path
+          path: ui/button_grey.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        texturePressed:
+          textureType: 2D
+          source: path
+          path: ui/button_grey.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        textureDisabled:
+          textureType: 2D
+          source: path
+          path: ui/button_grey.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        colorNormal: [1, 1, 1, 1]
+        colorHovered: [0.9, 0.95, 1, 1]
+        colorPressed: [0.75, 0.8, 0.85, 1]
+        colorDisabled: [0.5, 0.5, 0.5, 1]
+        disabled: false
+      uilayout:
+        width: 300
+        height: 76
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [0, 122]
+        anchorPreset: CENTER
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: false
+      image:
+        patchMarginLeft: 12
+        patchMarginRight: 12
+        patchMarginTop: 12
+        patchMarginBottom: 16
+        textureScaleFactor: 0
+      script:
+        scripts:
+          - type: cpp
+            path: scripts/MenuButton.cpp
+            headerPath: scripts/MenuButton.h
+            className: MenuButton
+            enabled: true
+            properties:
+              - name: action
+                displayName: Action
+                type: String
+                value: menu
+                defaultValue: play
+              - name: targetScene
+                displayName: Target Scene
+                type: String
+                value: Intro Scene
+                defaultValue: Level One
+    children:
+      - type: Entity
+        entity: 1051
+        name: Label
+        components:
+          transform:
+            position: [0, 0, 0]
+            rotation: [1, 0, 0, 0]
+            scale: [1, 1, 1]
+            worldPosition: [0, 0, 0]
+            worldRotation: [1, 0, 0, 0]
+            worldScale: [1, 1, 1]
+            localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            visible: true
+            billboardRotation: [1, 0, 0, 0]
+            billboard: false
+            fakeBillboard: false
+            cylindricalBillboard: false
+          ui:
+            buffer:
+              type: vertex_buffer
+              usage: immutable
+              stride: 0
+              size: 0
+              count: 0
+              renderAttributes: true
+              instanceBuffer: false
+              attributes: ~
+            indices:
+              type: index_buffer
+              usage: immutable
+              stride: 2
+              size: 0
+              count: 0
+              renderAttributes: true
+              instanceBuffer: false
+              attributes:
+                - type: index
+                  dataType: unsigned_short
+                  bufferName: ""
+                  elements: 1
+                  offset: 0
+                  count: 0
+                  normalized: true
+                  perInstance: false
+            minBufferCount: 0
+            minIndicesCount: 0
+            primitiveType: triangles
+            vertexCount: 0
+            aabb:
+              min: [0, 0, 0]
+              max: [0, 0, 0]
+            worldAABB:
+              min: [0, 0, 0]
+              max: [0, 0, 0]
+            texture: ~
+            color: [0.16, 0.2, 0.3, 1]
+            automaticFlipY: true
+            flipY: false
+            pointerMoved: false
+            focused: false
+          uilayout:
+            width: 0
+            height: 0
+            anchorPointLeft: 0
+            anchorPointTop: 0
+            anchorPointRight: 0
+            anchorPointBottom: 0
+            anchorOffsetLeft: 0
+            anchorOffsetTop: 0
+            anchorOffsetRight: 0
+            anchorOffsetBottom: 0
+            positionOffset: [0, -4]
+            anchorPreset: CENTER
+            usingAnchors: true
+            panel: 0
+            containerBoxIndex: -1
+            scissor: [0, 0, 0, 0]
+            ignoreScissor: false
+            ignoreEvents: true
+          text:
+            font: [fonts/KenneyFuture.ttf]
+            text: MAIN MENU
+            fontSize: 34
+            multiline: false
+            maxTextSize: 64
+            fixedWidth: false
+            fixedHeight: false
+            pivotBaseline: false
+            pivotCentered: false

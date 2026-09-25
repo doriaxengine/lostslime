@@ -1,0 +1,24 @@
+name: Build Artifacts
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    uses: doriaxengine/doriax-project-example-ci/.github/workflows/build-project.yml@v1
+    with:
+      title: Lost Slime
+      subtitle: Grab the key, stomp slimes and bees and reach the exit door.
+      description: A small side-scrolling platformer made with Doriax Engine. Run through three levels, grab the key and reach the exit door before your hearts run out.
+      controls: |
+        Move [←] [→] [A] [D] or gamepad
+        Jump [Space] [↑] [W]
+        Drop [↓] + jump
+        Pause [Esc] [P]

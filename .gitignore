@@ -1,0 +1,8 @@
+.doriax
+.vscode
+.trash
+build
+.ci-build
+AGENTS.md
+CMakeLists.txt
+UserSettings.xml

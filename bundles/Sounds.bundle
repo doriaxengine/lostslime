@@ -1,0 +1,233 @@
+type: EntityBundle
+members:
+  - type: Entity
+    entity: 181
+    name: Jump Sound
+    components:
+      sound:
+        state: stopped
+        filename: audio/jump.ogg
+        enableClocked: false
+        volume: 0.5
+        speed: 1
+        pan: 0
+        looping: false
+        loopingPoint: 0
+        protectVoice: false
+        inaudibleBehaviorMustTick: false
+        inaudibleBehaviorKill: false
+        minDistance: 1
+        maxDistance: 1000
+        attenuationModel: no_attenuation
+        attenuationRolloffFactor: 1
+        dopplerFactor: 1
+  - type: Entity
+    entity: 182
+    name: Coin Sound
+    components:
+      sound:
+        state: stopped
+        filename: audio/coin.ogg
+        enableClocked: false
+        volume: 0.6
+        speed: 1
+        pan: 0
+        looping: false
+        loopingPoint: 0
+        protectVoice: false
+        inaudibleBehaviorMustTick: false
+        inaudibleBehaviorKill: false
+        minDistance: 1
+        maxDistance: 1000
+        attenuationModel: no_attenuation
+        attenuationRolloffFactor: 1
+        dopplerFactor: 1
+  - type: Entity
+    entity: 183
+    name: Gem Sound
+    components:
+      sound:
+        state: stopped
+        filename: audio/gem.ogg
+        enableClocked: false
+        volume: 0.7
+        speed: 1
+        pan: 0
+        looping: false
+        loopingPoint: 0
+        protectVoice: false
+        inaudibleBehaviorMustTick: false
+        inaudibleBehaviorKill: false
+        minDistance: 1
+        maxDistance: 1000
+        attenuationModel: no_attenuation
+        attenuationRolloffFactor: 1
+        dopplerFactor: 1
+  - type: Entity
+    entity: 184
+    name: Key Sound
+    components:
+      sound:
+        state: stopped
+        filename: audio/magic.ogg
+        enableClocked: false
+        volume: 0.8
+        speed: 1
+        pan: 0
+        looping: false
+        loopingPoint: 0
+        protectVoice: false
+        inaudibleBehaviorMustTick: false
+        inaudibleBehaviorKill: false
+        minDistance: 1
+        maxDistance: 1000
+        attenuationModel: no_attenuation
+        attenuationRolloffFactor: 1
+        dopplerFactor: 1
+  - type: Entity
+    entity: 185
+    name: Hurt Sound
+    components:
+      sound:
+        state: stopped
+        filename: audio/hurt.ogg
+        enableClocked: false
+        volume: 0.8
+        speed: 1
+        pan: 0
+        looping: false
+        loopingPoint: 0
+        protectVoice: false
+        inaudibleBehaviorMustTick: false
+        inaudibleBehaviorKill: false
+        minDistance: 1
+        maxDistance: 1000
+        attenuationModel: no_attenuation
+        attenuationRolloffFactor: 1
+        dopplerFactor: 1
+  - type: Entity
+    entity: 186
+    name: Squash Sound
+    components:
+      sound:
+        state: stopped
+        filename: audio/disappear.ogg
+        enableClocked: false
+        volume: 0.7
+        speed: 1
+        pan: 0
+        looping: false
+        loopingPoint: 0
+        protectVoice: false
+        inaudibleBehaviorMustTick: false
+        inaudibleBehaviorKill: false
+        minDistance: 1
+        maxDistance: 1000
+        attenuationModel: no_attenuation
+        attenuationRolloffFactor: 1
+        dopplerFactor: 1
+  - type: Entity
+    entity: 187
+    name: Door Sound
+    components:
+      sound:
+        state: stopped
+        filename: audio/magic.ogg
+        enableClocked: false
+        volume: 0.7
+        speed: 1
+        pan: 0
+        looping: false
+        loopingPoint: 0
+        protectVoice: false
+        inaudibleBehaviorMustTick: false
+        inaudibleBehaviorKill: false
+        minDistance: 1
+        maxDistance: 1000
+        attenuationModel: no_attenuation
+        attenuationRolloffFactor: 1
+        dopplerFactor: 1
+  - type: Entity
+    entity: 188
+    name: Locked Sound
+    components:
+      sound:
+        state: stopped
+        filename: audio/bump.ogg
+        enableClocked: false
+        volume: 0.6
+        speed: 1
+        pan: 0
+        looping: false
+        loopingPoint: 0
+        protectVoice: false
+        inaudibleBehaviorMustTick: false
+        inaudibleBehaviorKill: false
+        minDistance: 1
+        maxDistance: 1000
+        attenuationModel: no_attenuation
+        attenuationRolloffFactor: 1
+        dopplerFactor: 1
+  - type: Entity
+    entity: 189
+    name: Select Sound
+    components:
+      sound:
+        state: stopped
+        filename: audio/click.ogg
+        enableClocked: false
+        volume: 0.7
+        speed: 1
+        pan: 0
+        looping: false
+        loopingPoint: 0
+        protectVoice: false
+        inaudibleBehaviorMustTick: false
+        inaudibleBehaviorKill: false
+        minDistance: 1
+        maxDistance: 1000
+        attenuationModel: no_attenuation
+        attenuationRolloffFactor: 1
+        dopplerFactor: 1
+  - type: Entity
+    entity: 190
+    name: Bump Sound
+    components:
+      sound:
+        state: stopped
+        filename: audio/bump.ogg
+        enableClocked: false
+        volume: 0.5
+        speed: 1
+        pan: 0
+        looping: false
+        loopingPoint: 0
+        protectVoice: false
+        inaudibleBehaviorMustTick: false
+        inaudibleBehaviorKill: false
+        minDistance: 1
+        maxDistance: 1000
+        attenuationModel: no_attenuation
+        attenuationRolloffFactor: 1
+        dopplerFactor: 1
+  - type: Entity
+    entity: 191
+    name: Music
+    components:
+      sound:
+        state: stopped
+        filename: audio/music.ogg
+        enableClocked: false
+        volume: 0.3
+        speed: 1
+        pan: 0
+        looping: true
+        loopingPoint: 0
+        protectVoice: true
+        inaudibleBehaviorMustTick: false
+        inaudibleBehaviorKill: false
+        minDistance: 1
+        maxDistance: 1000
+        attenuationModel: no_attenuation
+        attenuationRolloffFactor: 1
+        dopplerFactor: 1

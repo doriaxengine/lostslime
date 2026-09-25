@@ -1,0 +1,3455 @@
+id: 7
+name: Level Two
+scene:
+  backgroundColor: [0.53, 0.81, 0.98, 1]
+  shadowQuality: low
+  meshLodEnabled: true
+  meshLodThreshold: 1
+  depthPrepassEnabled: false
+  lightState: off
+  globalIlluminationIntensity: 0.1
+  globalIlluminationColor: [1, 1, 1]
+  ambientLight2DIntensity: 1
+  ambientLight2DColor: [1, 1, 1]
+  shadow2DQuality: low
+  ssaoEnabled: false
+  ssaoRadius: 0.5
+  ssaoIntensity: 1
+  ssaoBias: 0.025
+  ssrEnabled: false
+  ssrMaxDistance: 8
+  ssrThickness: 0.5
+  ssrMaxSteps: 48
+  ssrIntensity: 1
+  ssrBlur: 0
+  gravity2D: [0, -28]
+  gravity3D: [0, -9.81, 0]
+  fixedResolutionEnabled: false
+  fixedResolutionWidth: 640
+  fixedResolutionHeight: 360
+  fixedResolutionFilter: nearest
+  enableUIEvents: not_set
+sceneType: scene_2d
+mainCamera: 0
+maxValues:
+  maxSubmeshes: 1
+  maxTilemapTilesRect: 44
+  maxTilemapTiles: 351
+  maxExternalBuffers: 0
+  maxSpriteFrames: 7
+  maxBones: 128
+shaderKeys:
+  - type: points
+    properties: 5
+  - type: mesh
+    properties: 3075
+  - type: depth
+  - type: depth
+    properties: 129
+  - type: blit
+childScenes:
+  - id: 3
+    startActive: true
+  - id: 6
+    startActive: false
+cppScripts:
+  - path: scripts/LevelController.cpp
+    headerPath: scripts/LevelController.h
+    className: LevelController
+    properties:
+      - name: sceneName
+        isPtr: false
+      - name: levelTitle
+        isPtr: false
+      - name: nextScene
+        isPtr: false
+      - name: levelWidth
+        isPtr: false
+      - name: levelHeight
+        isPtr: false
+      - name: cameraSmoothing
+        isPtr: false
+      - name: backgroundParallax
+        isPtr: false
+      - name: spawnPoint
+        isPtr: true
+        ptrTypeName: doriax::Object
+  - path: scripts/ExitDoor.cpp
+    headerPath: scripts/ExitDoor.h
+    className: ExitDoor
+    properties:
+      - name: needsKey
+        isPtr: false
+  - path: scripts/Collectible.cpp
+    headerPath: scripts/Collectible.h
+    className: Collectible
+    properties:
+      - name: kind
+        isPtr: false
+      - name: scoreValue
+        isPtr: false
+      - name: bobHeight
+        isPtr: false
+  - path: scripts/Enemy.cpp
+    headerPath: scripts/Enemy.h
+    className: Enemy
+    properties:
+      - name: speed
+        isPtr: false
+      - name: patrolDistance
+        isPtr: false
+      - name: flying
+        isPtr: false
+      - name: hoverHeight
+        isPtr: false
+      - name: stompHeight
+        isPtr: false
+      - name: scoreValue
+        isPtr: false
+  - path: scripts/PlayerController.cpp
+    headerPath: scripts/PlayerController.h
+    className: PlayerController
+bundles:
+  - bundles/Bee.bundle
+  - bundles/Coin.bundle
+  - bundles/Door.bundle
+  - bundles/Gem.bundle
+  - bundles/Key.bundle
+  - bundles/Player.bundle
+  - bundles/Saw.bundle
+  - bundles/Slime.bundle
+  - bundles/Sounds.bundle
+entities:
+  - type: Entity
+    entity: 1001
+    name: Level
+    components:
+      script:
+        scripts:
+          - type: cpp
+            path: scripts/LevelController.cpp
+            headerPath: scripts/LevelController.h
+            className: LevelController
+            enabled: true
+            properties:
+              - name: sceneName
+                displayName: Scene Name
+                type: String
+                value: Level Two
+                defaultValue: Level One
+              - name: levelTitle
+                displayName: Level Title
+                type: String
+                value: Sunny Dunes
+                defaultValue: Green Hills
+              - name: nextScene
+                displayName: Next Scene
+                type: String
+                value: Level Three
+                defaultValue: Level Two
+              - name: levelWidth
+                displayName: Level Width
+                type: Float
+                value: 4608
+                defaultValue: 3840
+              - name: levelHeight
+                displayName: Level Height
+                type: Float
+                value: 896
+                defaultValue: 896
+              - name: cameraSmoothing
+                displayName: Camera Smoothing
+                type: Float
+                value: 8
+                defaultValue: 8
+              - name: backgroundParallax
+                displayName: Background Parallax
+                type: Float
+                value: 0.3
+                defaultValue: 0.3
+              - name: spawnPoint
+                displayName: Spawn Point
+                type: EntityReference
+                ptrTypeName: doriax::Object
+                value: 1002
+                defaultValue: 0
+  - type: Entity
+    entity: 1003
+    name: Sounds
+    components:
+      bundle:
+        name: Sounds
+        path: bundles/Sounds.bundle
+  - type: Entity
+    entity: 1004
+    name: Background
+    components:
+      transform:
+        position: [2329.5994, 0, -5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [2329.5994, 0, -5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2329.5994, 0, -5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2329.5994, 0, -5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      mesh:
+        submeshes:
+          - material:
+              baseColorFactor: [1, 1, 1, 1]
+              metallicFactor: 1
+              roughnessFactor: 1
+              alphaCutoff: 0.5
+              foliageTransmission: 0
+              alphaMode: AUTO
+              emissiveFactor: [0, 0, 0]
+              baseColorTexture:
+                textureType: 2D
+                source: path
+                path: backgrounds/backgrounds.png
+                minFilter: linear
+                magFilter: linear
+                wrapU: clamp_to_edge
+                wrapV: clamp_to_edge
+                releaseDataAfterLoad: true
+              baseColorTexCoord: 0
+              metallicRoughnessTexCoord: 0
+              occlusionTexCoord: 0
+              emissiveTexCoord: 0
+              normalTexCoord: 0
+              name: ""
+            textureRect: [0, 0, 1, 1]
+            primitiveType: triangles
+            vertexCount: 288
+            faceCulling: true
+            textureShadow: false
+            hasTexCoord1: true
+            hasTexCoord2: false
+            hasNormalMap: false
+            hasTangent: true
+            hasVertexColor3: false
+            hasVertexColor4: true
+            hasTextureRect: true
+            hasSkinning: false
+            hasMorphTarget: false
+            hasMorphNormal: false
+            hasMorphTangent: false
+        normAdjustJoint: 1
+        normAdjustWeight: 1
+        morphWeights: [0, 0, 0, 0, 0, 0, 0, 0]
+        aabb:
+          min: [0, 0, 0]
+          max: [3072, 1024, 0]
+        verticesAABB:
+          min: [0, 0, 0]
+          max: [3072, 1024, 0]
+        worldAABB:
+          min: [2329.5994, 0, -5]
+          max: [5401.5996, 1024, -5]
+        receiveLights: false
+        receiveIBL: false
+        castShadows: false
+        receiveShadows: false
+        lodEnabled: true
+        lodBias: 1
+        renderInReflectionProbes: true
+        shadowsBillboard: false
+        transparent: false
+        cullingMode: back
+        windingOrder: ccw
+      tilemap:
+        width: 3072
+        height: 1024
+        automaticFlipY: true
+        flipY: true
+        textureScaleFactor: 0.5
+        reserveTiles: 32
+        tilesRect:
+          - name: background_clouds
+            submeshId: 0
+            rect: [0, 0, 256, 256]
+          - name: background_color_desert
+            submeshId: 0
+            rect: [257, 0, 256, 256]
+          - name: background_fade_desert
+            submeshId: 0
+            rect: [257, 257, 256, 256]
+          - name: background_solid_sky
+            submeshId: 0
+            rect: [257, 771, 256, 256]
+        tiles:
+          - name: background_color_desert
+            rectId: 1
+            position: [0, 0]
+            width: 256
+            height: 256
+          - name: background_color_desert
+            rectId: 1
+            position: [256, 0]
+            width: 256
+            height: 256
+          - name: background_color_desert
+            rectId: 1
+            position: [512, 0]
+            width: 256
+            height: 256
+          - name: background_color_desert
+            rectId: 1
+            position: [768, 0]
+            width: 256
+            height: 256
+          - name: background_color_desert
+            rectId: 1
+            position: [1024, 0]
+            width: 256
+            height: 256
+          - name: background_color_desert
+            rectId: 1
+            position: [1280, 0]
+            width: 256
+            height: 256
+          - name: background_color_desert
+            rectId: 1
+            position: [1536, 0]
+            width: 256
+            height: 256
+          - name: background_color_desert
+            rectId: 1
+            position: [1792, 0]
+            width: 256
+            height: 256
+          - name: background_color_desert
+            rectId: 1
+            position: [2048, 0]
+            width: 256
+            height: 256
+          - name: background_color_desert
+            rectId: 1
+            position: [2304, 0]
+            width: 256
+            height: 256
+          - name: background_color_desert
+            rectId: 1
+            position: [2560, 0]
+            width: 256
+            height: 256
+          - name: background_color_desert
+            rectId: 1
+            position: [2816, 0]
+            width: 256
+            height: 256
+          - name: background_fade_desert
+            rectId: 2
+            position: [0, 256]
+            width: 256
+            height: 256
+          - name: background_fade_desert
+            rectId: 2
+            position: [256, 256]
+            width: 256
+            height: 256
+          - name: background_fade_desert
+            rectId: 2
+            position: [512, 256]
+            width: 256
+            height: 256
+          - name: background_fade_desert
+            rectId: 2
+            position: [768, 256]
+            width: 256
+            height: 256
+          - name: background_fade_desert
+            rectId: 2
+            position: [1024, 256]
+            width: 256
+            height: 256
+          - name: background_fade_desert
+            rectId: 2
+            position: [1280, 256]
+            width: 256
+            height: 256
+          - name: background_fade_desert
+            rectId: 2
+            position: [1536, 256]
+            width: 256
+            height: 256
+          - name: background_fade_desert
+            rectId: 2
+            position: [1792, 256]
+            width: 256
+            height: 256
+          - name: background_fade_desert
+            rectId: 2
+            position: [2048, 256]
+            width: 256
+            height: 256
+          - name: background_fade_desert
+            rectId: 2
+            position: [2304, 256]
+            width: 256
+            height: 256
+          - name: background_fade_desert
+            rectId: 2
+            position: [2560, 256]
+            width: 256
+            height: 256
+          - name: background_fade_desert
+            rectId: 2
+            position: [2816, 256]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [0, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [256, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [512, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [768, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [1024, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [1280, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [1536, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [1792, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [2048, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [2304, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [2560, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [2816, 512]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [0, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [256, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [512, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [768, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [1024, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [1280, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [1536, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [1792, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [2048, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [2304, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [2560, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [2816, 768]
+            width: 256
+            height: 256
+  - type: Entity
+    entity: 1005
+    name: Terrain
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      mesh:
+        submeshes:
+          - material:
+              baseColorFactor: [1, 1, 1, 1]
+              metallicFactor: 1
+              roughnessFactor: 1
+              alphaCutoff: 0.5
+              foliageTransmission: 0
+              alphaMode: AUTO
+              emissiveFactor: [0, 0, 0]
+              baseColorTexture:
+                textureType: 2D
+                source: path
+                path: tiles/tileset.png
+                minFilter: linear
+                magFilter: linear
+                wrapU: clamp_to_edge
+                wrapV: clamp_to_edge
+                releaseDataAfterLoad: true
+              baseColorTexCoord: 0
+              metallicRoughnessTexCoord: 0
+              occlusionTexCoord: 0
+              emissiveTexCoord: 0
+              normalTexCoord: 0
+              name: ""
+            textureRect: [0, 0, 1, 1]
+            primitiveType: triangles
+            vertexCount: 2106
+            faceCulling: true
+            textureShadow: false
+            hasTexCoord1: true
+            hasTexCoord2: false
+            hasNormalMap: false
+            hasTangent: true
+            hasVertexColor3: false
+            hasVertexColor4: true
+            hasTextureRect: true
+            hasSkinning: false
+            hasMorphTarget: false
+            hasMorphNormal: false
+            hasMorphTangent: false
+        normAdjustJoint: 1
+        normAdjustWeight: 1
+        morphWeights: [0, 0, 0, 0, 0, 0, 0, 0]
+        aabb:
+          min: [0, 0, 0]
+          max: [4608, 704, 0]
+        verticesAABB:
+          min: [0, 0, 0]
+          max: [4608, 704, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [4608, 704, 0]
+        receiveLights: false
+        receiveIBL: false
+        castShadows: false
+        receiveShadows: false
+        lodEnabled: true
+        lodBias: 1
+        renderInReflectionProbes: true
+        shadowsBillboard: false
+        transparent: false
+        cullingMode: back
+        windingOrder: ccw
+      tilemap:
+        width: 4608
+        height: 704
+        automaticFlipY: true
+        flipY: true
+        textureScaleFactor: 0.5
+        reserveTiles: 32
+        tilesRect:
+          - name: bush
+            submeshId: 0
+            rect: [845, 65, 64, 64]
+          - name: cactus
+            submeshId: 0
+            rect: [910, 65, 64, 64]
+          - name: fence
+            submeshId: 0
+            rect: [585, 130, 64, 64]
+          - name: grass
+            submeshId: 0
+            rect: [455, 195, 64, 64]
+          - name: hill
+            submeshId: 0
+            rect: [650, 195, 64, 64]
+          - name: hill_top
+            submeshId: 0
+            rect: [715, 195, 64, 64]
+          - name: ladder_middle
+            submeshId: 0
+            rect: [780, 325, 64, 64]
+          - name: mushroom_red
+            submeshId: 0
+            rect: [455, 390, 64, 64]
+          - name: rock
+            submeshId: 0
+            rect: [585, 390, 64, 64]
+          - name: sign
+            submeshId: 0
+            rect: [845, 390, 64, 64]
+          - name: sign_exit
+            submeshId: 0
+            rect: [910, 390, 64, 64]
+          - name: snow
+            submeshId: 0
+            rect: [1105, 390, 64, 64]
+          - name: spikes
+            submeshId: 0
+            rect: [0, 455, 64, 64]
+          - name: terrain_sand_block
+            submeshId: 0
+            rect: [390, 780, 64, 64]
+          - name: terrain_sand_block_bottom
+            submeshId: 0
+            rect: [455, 780, 64, 64]
+          - name: terrain_sand_block_bottom_left
+            submeshId: 0
+            rect: [520, 780, 64, 64]
+          - name: terrain_sand_block_bottom_right
+            submeshId: 0
+            rect: [585, 780, 64, 64]
+          - name: terrain_sand_block_center
+            submeshId: 0
+            rect: [650, 780, 64, 64]
+          - name: terrain_sand_block_left
+            submeshId: 0
+            rect: [715, 780, 64, 64]
+          - name: terrain_sand_block_right
+            submeshId: 0
+            rect: [780, 780, 64, 64]
+          - name: terrain_sand_block_top
+            submeshId: 0
+            rect: [845, 780, 64, 64]
+          - name: terrain_sand_block_top_left
+            submeshId: 0
+            rect: [910, 780, 64, 64]
+          - name: terrain_sand_block_top_right
+            submeshId: 0
+            rect: [975, 780, 64, 64]
+          - name: terrain_sand_cloud
+            submeshId: 0
+            rect: [1040, 780, 64, 64]
+          - name: terrain_sand_cloud_background
+            submeshId: 0
+            rect: [1105, 780, 64, 64]
+          - name: terrain_sand_cloud_left
+            submeshId: 0
+            rect: [0, 845, 64, 64]
+          - name: terrain_sand_cloud_middle
+            submeshId: 0
+            rect: [65, 845, 64, 64]
+          - name: terrain_sand_cloud_right
+            submeshId: 0
+            rect: [130, 845, 64, 64]
+          - name: terrain_sand_horizontal_left
+            submeshId: 0
+            rect: [195, 845, 64, 64]
+          - name: terrain_sand_horizontal_middle
+            submeshId: 0
+            rect: [260, 845, 64, 64]
+          - name: terrain_sand_horizontal_overhang_left
+            submeshId: 0
+            rect: [325, 845, 64, 64]
+          - name: terrain_sand_horizontal_overhang_right
+            submeshId: 0
+            rect: [390, 845, 64, 64]
+          - name: terrain_sand_horizontal_right
+            submeshId: 0
+            rect: [455, 845, 64, 64]
+          - name: terrain_sand_ramp_long_a
+            submeshId: 0
+            rect: [520, 845, 64, 64]
+          - name: terrain_sand_ramp_long_b
+            submeshId: 0
+            rect: [585, 845, 64, 64]
+          - name: terrain_sand_ramp_long_c
+            submeshId: 0
+            rect: [650, 845, 64, 64]
+          - name: terrain_sand_ramp_short_a
+            submeshId: 0
+            rect: [715, 845, 64, 64]
+          - name: terrain_sand_ramp_short_b
+            submeshId: 0
+            rect: [780, 845, 64, 64]
+          - name: terrain_sand_vertical_bottom
+            submeshId: 0
+            rect: [845, 845, 64, 64]
+          - name: terrain_sand_vertical_middle
+            submeshId: 0
+            rect: [910, 845, 64, 64]
+          - name: terrain_sand_vertical_top
+            submeshId: 0
+            rect: [975, 845, 64, 64]
+          - name: water
+            submeshId: 0
+            rect: [195, 1105, 64, 64]
+          - name: water_top
+            submeshId: 0
+            rect: [260, 1105, 64, 64]
+          - name: water_top_low
+            submeshId: 0
+            rect: [325, 1105, 64, 64]
+        tiles:
+          - name: terrain_sand_horizontal_left
+            rectId: 28
+            position: [3520, 640]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_middle
+            rectId: 29
+            position: [3584, 640]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_right
+            rectId: 32
+            position: [3648, 640]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_left
+            rectId: 28
+            position: [1600, 512]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_middle
+            rectId: 29
+            position: [1664, 512]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_middle
+            rectId: 29
+            position: [1728, 512]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_middle
+            rectId: 29
+            position: [1792, 512]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_right
+            rectId: 32
+            position: [1856, 512]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_left
+            rectId: 28
+            position: [2880, 448]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_middle
+            rectId: 29
+            position: [2944, 448]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_middle
+            rectId: 29
+            position: [3008, 448]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_middle
+            rectId: 29
+            position: [3072, 448]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_right
+            rectId: 32
+            position: [3136, 448]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_left
+            rectId: 28
+            position: [3712, 448]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_middle
+            rectId: 29
+            position: [3776, 448]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_right
+            rectId: 32
+            position: [3840, 448]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_left
+            rectId: 28
+            position: [960, 384]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_middle
+            rectId: 29
+            position: [1024, 384]
+            width: 64
+            height: 64
+          - name: terrain_sand_horizontal_right
+            rectId: 32
+            position: [1088, 384]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [1664, 384]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [1728, 384]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [1792, 384]
+            width: 64
+            height: 64
+          - name: cactus
+            rectId: 1
+            position: [320, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top_left
+            rectId: 21
+            position: [1408, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [1472, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [1536, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [1600, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [1664, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [1728, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [1792, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [1856, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top_right
+            rectId: 22
+            position: [1920, 320]
+            width: 64
+            height: 64
+          - name: rock
+            rectId: 8
+            position: [2240, 320]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [2944, 320]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [3008, 320]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [3072, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top_left
+            rectId: 21
+            position: [3456, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [3520, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [3584, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [3648, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [3712, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [3776, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top_right
+            rectId: 22
+            position: [3840, 320]
+            width: 64
+            height: 64
+          - name: cactus
+            rectId: 1
+            position: [4224, 320]
+            width: 64
+            height: 64
+          - name: sign_exit
+            rectId: 10
+            position: [4416, 320]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [0, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [64, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [128, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [192, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [256, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [320, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [384, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top_right
+            rectId: 22
+            position: [448, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top_left
+            rectId: 21
+            position: [704, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [768, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [832, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [896, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [960, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [1024, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [1088, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top_right
+            rectId: 22
+            position: [1152, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [1408, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1472, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1536, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1600, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1664, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1728, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1792, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1856, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [1920, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top_left
+            rectId: 21
+            position: [2176, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [2240, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [2304, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [2368, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top_right
+            rectId: 22
+            position: [2432, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top_left
+            rectId: 21
+            position: [2688, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [2752, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [2816, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [2880, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [2944, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [3008, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [3072, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [3136, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top_right
+            rectId: 22
+            position: [3200, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [3456, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3520, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3584, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3648, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3712, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3776, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [3840, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top_left
+            rectId: 21
+            position: [4096, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [4160, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [4224, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [4288, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [4352, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [4416, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [4480, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_top
+            rectId: 20
+            position: [4544, 256]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [0, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [64, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [128, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [192, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [256, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [320, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [384, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [448, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [704, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [768, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [832, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [896, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [960, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1024, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1088, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [1152, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [1408, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1472, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1536, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1600, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1664, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1728, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1792, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1856, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [1920, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [2176, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2240, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2304, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2368, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [2432, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [2688, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2752, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2816, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2880, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2944, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3008, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3072, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3136, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [3200, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [3456, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3520, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3584, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3648, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3712, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3776, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [3840, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [4096, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4160, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4224, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4288, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4352, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4416, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4480, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4544, 192]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [0, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [64, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [128, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [192, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [256, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [320, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [384, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [448, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [704, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [768, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [832, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [896, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [960, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1024, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1088, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [1152, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [1408, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1472, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1536, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1600, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1664, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1728, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1792, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1856, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [1920, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [2176, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2240, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2304, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2368, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [2432, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [2688, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2752, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2816, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2880, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2944, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3008, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3072, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3136, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [3200, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [3456, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3520, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3584, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3648, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3712, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3776, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [3840, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [4096, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4160, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4224, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4288, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4352, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4416, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4480, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4544, 128]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [0, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [64, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [128, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [192, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [256, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [320, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [384, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [448, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [512, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [576, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [640, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [704, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [768, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [832, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [896, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [960, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1024, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1088, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [1152, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [1216, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [1280, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [1344, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [1408, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1472, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1536, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1600, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1664, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1728, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1792, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1856, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [1920, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [1984, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [2048, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [2112, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [2176, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2240, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2304, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2368, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [2432, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [2496, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [2560, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [2624, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [2688, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2752, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2816, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2880, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2944, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3008, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3072, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3136, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [3200, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [3264, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [3328, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [3392, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [3456, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3520, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3584, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3648, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3712, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3776, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [3840, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [3904, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [3968, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [4032, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [4096, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4160, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4224, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4288, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4352, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4416, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4480, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4544, 64]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [0, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [64, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [128, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [192, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [256, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [320, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [384, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [448, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [512, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [576, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [640, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [704, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [768, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [832, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [896, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [960, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1024, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1088, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [1152, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [1216, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [1280, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [1344, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [1408, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1472, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1536, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1600, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1664, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1728, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1792, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [1856, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [1920, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [1984, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [2048, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [2112, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [2176, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2240, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2304, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2368, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [2432, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [2496, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [2560, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [2624, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [2688, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2752, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2816, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2880, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [2944, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3008, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3072, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3136, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [3200, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [3264, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [3328, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [3392, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [3456, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3520, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3584, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3648, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3712, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [3776, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_right
+            rectId: 19
+            position: [3840, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [3904, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [3968, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [4032, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_left
+            rectId: 18
+            position: [4096, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4160, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4224, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4288, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4352, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4416, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4480, 0]
+            width: 64
+            height: 64
+          - name: terrain_sand_block_center
+            rectId: 17
+            position: [4544, 0]
+            width: 64
+            height: 64
+  - type: Entity
+    entity: 1006
+    name: Terrain Collider 1
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      body2d:
+        type: static
+        numShapes: 10
+        shapes:
+          - type: polygon
+            pointA: [3520, 640]
+            pointB: [3712, 704]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [3520, 640]
+              - [3712, 640]
+              - [3712, 704]
+              - [3520, 704]
+          - type: polygon
+            pointA: [1600, 512]
+            pointB: [1920, 576]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [1600, 512]
+              - [1920, 512]
+              - [1920, 576]
+              - [1600, 576]
+          - type: polygon
+            pointA: [2880, 448]
+            pointB: [3200, 512]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [2880, 448]
+              - [3200, 448]
+              - [3200, 512]
+              - [2880, 512]
+          - type: polygon
+            pointA: [3712, 448]
+            pointB: [3904, 512]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [3712, 448]
+              - [3904, 448]
+              - [3904, 512]
+              - [3712, 512]
+          - type: polygon
+            pointA: [960, 384]
+            pointB: [1152, 448]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [960, 384]
+              - [1152, 384]
+              - [1152, 448]
+              - [960, 448]
+          - type: polygon
+            pointA: [1408, 0]
+            pointB: [1984, 384]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [1408, 0]
+              - [1984, 0]
+              - [1984, 384]
+              - [1408, 384]
+          - type: polygon
+            pointA: [3456, 0]
+            pointB: [3904, 384]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [3456, 0]
+              - [3904, 0]
+              - [3904, 384]
+              - [3456, 384]
+          - type: polygon
+            pointA: [0, 0]
+            pointB: [512, 320]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [0, 0]
+              - [512, 0]
+              - [512, 320]
+              - [0, 320]
+          - type: polygon
+            pointA: [704, 0]
+            pointB: [1216, 320]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [704, 0]
+              - [1216, 0]
+              - [1216, 320]
+              - [704, 320]
+          - type: polygon
+            pointA: [2176, 0]
+            pointB: [2496, 320]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [2176, 0]
+              - [2496, 0]
+              - [2496, 320]
+              - [2176, 320]
+  - type: Entity
+    entity: 1007
+    name: Terrain Collider 2
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      body2d:
+        type: static
+        numShapes: 2
+        shapes:
+          - type: polygon
+            pointA: [2688, 0]
+            pointB: [3264, 320]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [2688, 0]
+              - [3264, 0]
+              - [3264, 320]
+              - [2688, 320]
+          - type: polygon
+            pointA: [4096, 0]
+            pointB: [4608, 320]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [4096, 0]
+              - [4608, 0]
+              - [4608, 320]
+              - [4096, 320]
+  - type: Entity
+    entity: 1008
+    name: Hazards 1
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      body2d:
+        type: static
+        numShapes: 6
+        shapes:
+          - type: polygon
+            pointA: [1670, 386]
+            pointB: [1722, 414]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [1670, 386]
+              - [1722, 386]
+              - [1722, 414]
+              - [1670, 414]
+          - type: polygon
+            pointA: [1734, 386]
+            pointB: [1786, 414]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [1734, 386]
+              - [1786, 386]
+              - [1786, 414]
+              - [1734, 414]
+          - type: polygon
+            pointA: [1798, 386]
+            pointB: [1850, 414]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [1798, 386]
+              - [1850, 386]
+              - [1850, 414]
+              - [1798, 414]
+          - type: polygon
+            pointA: [2950, 322]
+            pointB: [3002, 350]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [2950, 322]
+              - [3002, 322]
+              - [3002, 350]
+              - [2950, 350]
+          - type: polygon
+            pointA: [3014, 322]
+            pointB: [3066, 350]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [3014, 322]
+              - [3066, 322]
+              - [3066, 350]
+              - [3014, 350]
+          - type: polygon
+            pointA: [3078, 322]
+            pointB: [3130, 350]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [3078, 322]
+              - [3130, 322]
+              - [3130, 350]
+              - [3078, 350]
+  - type: Entity
+    entity: 1002
+    name: Spawn Point
+    components:
+      transform:
+        position: [160, 320, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [160, 320, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [160, 320, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [160, 320, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+  - type: Entity
+    entity: 1009
+    name: Door
+    components:
+      transform:
+        position: [4512, 320, 0.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [4512, 320, 0.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4512, 320, 0.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4512, 320, 0.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Door
+        path: bundles/Door.bundle
+  - type: Entity
+    entity: 1010
+    name: Gem
+    components:
+      transform:
+        position: [1760, 736, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [1760, 736, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1760, 736, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1760, 736, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Gem
+        path: bundles/Gem.bundle
+  - type: Entity
+    entity: 1011
+    name: Coin
+    components:
+      transform:
+        position: [3552, 736, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3552, 736, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3552, 736, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3552, 736, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1012
+    name: Key
+    components:
+      transform:
+        position: [3616, 736, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3616, 736, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3616, 736, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3616, 736, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Key
+        path: bundles/Key.bundle
+  - type: Entity
+    entity: 1013
+    name: Coin 2
+    components:
+      transform:
+        position: [3680, 736, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3680, 736, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3680, 736, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3680, 736, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1016
+    name: Coin 3
+    components:
+      transform:
+        position: [1632, 608, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [1632, 608, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1632, 608, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1632, 608, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1019
+    name: Coin 4
+    components:
+      transform:
+        position: [1760, 608, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [1760, 608, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1760, 608, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1760, 608, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1022
+    name: Coin 5
+    components:
+      transform:
+        position: [1888, 608, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [1888, 608, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1888, 608, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1888, 608, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1025
+    name: Coin 6
+    components:
+      transform:
+        position: [2912, 544, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [2912, 544, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2912, 544, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2912, 544, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1028
+    name: Coin 7
+    components:
+      transform:
+        position: [3040, 544, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3040, 544, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3040, 544, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3040, 544, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1031
+    name: Coin 8
+    components:
+      transform:
+        position: [3168, 544, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3168, 544, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3168, 544, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3168, 544, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1034
+    name: Coin 9
+    components:
+      transform:
+        position: [992, 480, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [992, 480, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [992, 480, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [992, 480, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1037
+    name: Coin 10
+    components:
+      transform:
+        position: [1120, 480, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [1120, 480, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1120, 480, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1120, 480, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1040
+    name: Coin 11
+    components:
+      transform:
+        position: [2208, 352, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [2208, 352, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2208, 352, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2208, 352, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1043
+    name: Coin 12
+    components:
+      transform:
+        position: [2464, 352, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [2464, 352, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2464, 352, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2464, 352, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1046
+    name: Bee
+    components:
+      transform:
+        position: [3040, 704, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3040, 704, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3040, 704, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3040, 704, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Bee
+        path: bundles/Bee.bundle
+  - type: Entity
+    entity: 1047
+    name: Saw
+    components:
+      transform:
+        position: [4384, 544, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [4384, 544, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4384, 544, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4384, 544, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Saw
+        path: bundles/Saw.bundle
+  - type: Entity
+    entity: 1048
+    name: Saw 2
+    components:
+      transform:
+        position: [2336, 480, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [2336, 480, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2336, 480, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2336, 480, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Saw
+        path: bundles/Saw.bundle
+  - type: Entity
+    entity: 1051
+    name: Slime
+    components:
+      transform:
+        position: [3680, 384, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3680, 384, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3680, 384, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3680, 384, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Slime
+        path: bundles/Slime.bundle
+  - type: Entity
+    entity: 1052
+    name: Slime 2
+    components:
+      transform:
+        position: [864, 320, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [864, 320, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [864, 320, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [864, 320, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Slime
+        path: bundles/Slime.bundle
+  - type: Entity
+    entity: 1055
+    name: Slime 3
+    components:
+      transform:
+        position: [2784, 320, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [2784, 320, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2784, 320, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2784, 320, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Slime
+        path: bundles/Slime.bundle
+  - type: Entity
+    entity: 1058
+    name: Player
+    components:
+      transform:
+        position: [160, 320, 2]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [160, 320, 2]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [160, 320, 2, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [160, 320, 2, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Player
+        path: bundles/Player.bundle

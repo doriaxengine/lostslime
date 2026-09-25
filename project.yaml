@@ -1,0 +1,30 @@
+name: LostSlime
+canvasWidth: 1280
+canvasHeight: 720
+scalingMode: fitwidth
+textureStrategy: none
+vsync: true
+windowMode: windowed
+windowWidth: 1280
+windowHeight: 720
+windowResizable: true
+windowTitle: Lost Slime
+assetsDir: assets
+luaDir: .
+scriptDirs:
+  - scripts
+application:
+  name: Lost Slime
+  identifier: org.doriax.lostslime
+  version: 1.0.0
+startSceneId: 2
+scenes:
+  - filepath: Intro Scene.scene
+  - filepath: Level One.scene
+  - filepath: Level Two.scene
+  - filepath: Level Three.scene
+  - filepath: HUD Scene.scene
+  - filepath: Pause Scene.scene
+  - filepath: Game Over Scene.scene
+  - filepath: Win Scene.scene
+  - filepath: Loading Scene.scene

@@ -1,0 +1,877 @@
+id: 3
+name: HUD Scene
+scene:
+  backgroundColor: [0.231, 0.298, 0.475, 1]
+  shadowQuality: low
+  meshLodEnabled: true
+  meshLodThreshold: 1
+  depthPrepassEnabled: false
+  lightState: off
+  globalIlluminationIntensity: 0.1
+  globalIlluminationColor: [1, 1, 1]
+  ambientLight2DIntensity: 1
+  ambientLight2DColor: [1, 1, 1]
+  shadow2DQuality: low
+  ssaoEnabled: false
+  ssaoRadius: 0.5
+  ssaoIntensity: 1
+  ssaoBias: 0.025
+  ssrEnabled: false
+  ssrMaxDistance: 8
+  ssrThickness: 0.5
+  ssrMaxSteps: 48
+  ssrIntensity: 1
+  ssrBlur: 0
+  gravity2D: [0, -9.81]
+  gravity3D: [0, -9.81, 0]
+  fixedResolutionEnabled: false
+  fixedResolutionWidth: 640
+  fixedResolutionHeight: 360
+  fixedResolutionFilter: nearest
+  enableUIEvents: not_set
+sceneType: scene_ui
+mainCamera: 0
+maxValues:
+  maxSubmeshes: 0
+  maxTilemapTilesRect: 0
+  maxTilemapTiles: 0
+  maxExternalBuffers: 0
+  maxSpriteFrames: 0
+  maxBones: 0
+shaderKeys:
+  - type: ui
+    properties: 2
+  - type: ui
+    properties: 8
+  - type: ui
+    properties: 9
+  - type: blit
+cppScripts:
+  - path: scripts/HudController.cpp
+    headerPath: scripts/HudController.h
+    className: HudController
+    properties:
+      - name: heart1
+        isPtr: true
+        ptrTypeName: doriax::Image
+      - name: heart2
+        isPtr: true
+        ptrTypeName: doriax::Image
+      - name: heart3
+        isPtr: true
+        ptrTypeName: doriax::Image
+      - name: coinText
+        isPtr: true
+        ptrTypeName: doriax::Text
+      - name: scoreText
+        isPtr: true
+        ptrTypeName: doriax::Text
+      - name: keyIcon
+        isPtr: true
+        ptrTypeName: doriax::Image
+      - name: levelText
+        isPtr: true
+        ptrTypeName: doriax::Text
+entities:
+  - type: Entity
+    entity: 1001
+    name: HUD
+    components:
+      script:
+        scripts:
+          - type: cpp
+            path: scripts/HudController.cpp
+            headerPath: scripts/HudController.h
+            className: HudController
+            enabled: true
+            properties:
+              - name: heart1
+                displayName: Heart 1
+                type: EntityReference
+                ptrTypeName: doriax::Image
+                value: 1011
+                defaultValue: 0
+              - name: heart2
+                displayName: Heart 2
+                type: EntityReference
+                ptrTypeName: doriax::Image
+                value: 1012
+                defaultValue: 0
+              - name: heart3
+                displayName: Heart 3
+                type: EntityReference
+                ptrTypeName: doriax::Image
+                value: 1013
+                defaultValue: 0
+              - name: coinText
+                displayName: Coin Text
+                type: EntityReference
+                ptrTypeName: doriax::Text
+                value: 1021
+                defaultValue: 0
+              - name: scoreText
+                displayName: Score Text
+                type: EntityReference
+                ptrTypeName: doriax::Text
+                value: 1030
+                defaultValue: 0
+              - name: keyIcon
+                displayName: Key Icon
+                type: EntityReference
+                ptrTypeName: doriax::Image
+                value: 1014
+                defaultValue: 0
+              - name: levelText
+                displayName: Level Text
+                type: EntityReference
+                ptrTypeName: doriax::Text
+                value: 1031
+                defaultValue: 0
+  - type: Entity
+    entity: 1011
+    name: Heart 1
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/hud_heart.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [1, 1, 1, 1]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 52
+        height: 52
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [14, 12]
+        anchorPreset: TOP_LEFT
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      image:
+        patchMarginLeft: 0
+        patchMarginRight: 0
+        patchMarginTop: 0
+        patchMarginBottom: 0
+        textureScaleFactor: 0
+  - type: Entity
+    entity: 1012
+    name: Heart 2
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/hud_heart.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [1, 1, 1, 1]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 52
+        height: 52
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [68, 12]
+        anchorPreset: TOP_LEFT
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      image:
+        patchMarginLeft: 0
+        patchMarginRight: 0
+        patchMarginTop: 0
+        patchMarginBottom: 0
+        textureScaleFactor: 0
+  - type: Entity
+    entity: 1013
+    name: Heart 3
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/hud_heart.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [1, 1, 1, 1]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 52
+        height: 52
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [122, 12]
+        anchorPreset: TOP_LEFT
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      image:
+        patchMarginLeft: 0
+        patchMarginRight: 0
+        patchMarginTop: 0
+        patchMarginBottom: 0
+        textureScaleFactor: 0
+  - type: Entity
+    entity: 1014
+    name: Key Icon
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/hud_key_yellow.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [1, 1, 1, 0.3]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 52
+        height: 52
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [188, 12]
+        anchorPreset: TOP_LEFT
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      image:
+        patchMarginLeft: 0
+        patchMarginRight: 0
+        patchMarginTop: 0
+        patchMarginBottom: 0
+        textureScaleFactor: 0
+  - type: Entity
+    entity: 1020
+    name: Coin Icon
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture:
+          textureType: 2D
+          source: path
+          path: ui/hud_coin.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+        color: [1, 1, 1, 1]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 48
+        height: 48
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [-120, 14]
+        anchorPreset: TOP_RIGHT
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      image:
+        patchMarginLeft: 0
+        patchMarginRight: 0
+        patchMarginTop: 0
+        patchMarginBottom: 0
+        textureScaleFactor: 0
+  - type: Entity
+    entity: 1021
+    name: Coin Text
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture: ~
+        color: [1, 1, 1, 1]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 0
+        height: 0
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [-20, 20]
+        anchorPreset: TOP_RIGHT
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      text:
+        font: [fonts/KenneyFuture.ttf]
+        text: x 0
+        fontSize: 34
+        multiline: false
+        maxTextSize: 64
+        fixedWidth: false
+        fixedHeight: false
+        pivotBaseline: false
+        pivotCentered: false
+  - type: Entity
+    entity: 1030
+    name: Score Text
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture: ~
+        color: [1, 0.85, 0.25, 1]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 0
+        height: 0
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [0, 12]
+        anchorPreset: CENTER_TOP
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      text:
+        font: [fonts/KenneyFuture.ttf]
+        text: 0
+        fontSize: 40
+        multiline: false
+        maxTextSize: 64
+        fixedWidth: false
+        fixedHeight: false
+        pivotBaseline: false
+        pivotCentered: false
+  - type: Entity
+    entity: 1031
+    name: Level Text
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      ui:
+        buffer:
+          type: vertex_buffer
+          usage: immutable
+          stride: 0
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes: ~
+        indices:
+          type: index_buffer
+          usage: immutable
+          stride: 2
+          size: 0
+          count: 0
+          renderAttributes: true
+          instanceBuffer: false
+          attributes:
+            - type: index
+              dataType: unsigned_short
+              bufferName: ""
+              elements: 1
+              offset: 0
+              count: 0
+              normalized: true
+              perInstance: false
+        minBufferCount: 0
+        minIndicesCount: 0
+        primitiveType: triangles
+        vertexCount: 0
+        aabb:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [0, 0, 0]
+        texture: ~
+        color: [1, 1, 1, 1]
+        automaticFlipY: true
+        flipY: false
+        pointerMoved: false
+        focused: false
+      uilayout:
+        width: 0
+        height: 0
+        anchorPointLeft: 0
+        anchorPointTop: 0
+        anchorPointRight: 0
+        anchorPointBottom: 0
+        anchorOffsetLeft: 0
+        anchorOffsetTop: 0
+        anchorOffsetRight: 0
+        anchorOffsetBottom: 0
+        positionOffset: [0, 58]
+        anchorPreset: CENTER_TOP
+        usingAnchors: true
+        panel: 0
+        containerBoxIndex: -1
+        scissor: [0, 0, 0, 0]
+        ignoreScissor: false
+        ignoreEvents: true
+      text:
+        font: [fonts/KenneyFutureNarrow.ttf]
+        text: Green Hills
+        fontSize: 24
+        multiline: false
+        maxTextSize: 64
+        fixedWidth: false
+        fixedHeight: false
+        pivotBaseline: false
+        pivotCentered: false

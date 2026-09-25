@@ -1,0 +1,4157 @@
+id: 8
+name: Level Three
+scene:
+  backgroundColor: [0.53, 0.81, 0.98, 1]
+  shadowQuality: low
+  meshLodEnabled: true
+  meshLodThreshold: 1
+  depthPrepassEnabled: false
+  lightState: off
+  globalIlluminationIntensity: 0.1
+  globalIlluminationColor: [1, 1, 1]
+  ambientLight2DIntensity: 1
+  ambientLight2DColor: [1, 1, 1]
+  shadow2DQuality: low
+  ssaoEnabled: false
+  ssaoRadius: 0.5
+  ssaoIntensity: 1
+  ssaoBias: 0.025
+  ssrEnabled: false
+  ssrMaxDistance: 8
+  ssrThickness: 0.5
+  ssrMaxSteps: 48
+  ssrIntensity: 1
+  ssrBlur: 0
+  gravity2D: [0, -28]
+  gravity3D: [0, -9.81, 0]
+  fixedResolutionEnabled: false
+  fixedResolutionWidth: 640
+  fixedResolutionHeight: 360
+  fixedResolutionFilter: nearest
+  enableUIEvents: not_set
+sceneType: scene_2d
+mainCamera: 0
+maxValues:
+  maxSubmeshes: 1
+  maxTilemapTilesRect: 44
+  maxTilemapTiles: 408
+  maxExternalBuffers: 0
+  maxSpriteFrames: 7
+  maxBones: 128
+shaderKeys:
+  - type: points
+    properties: 5
+  - type: mesh
+    properties: 3075
+  - type: depth
+  - type: depth
+    properties: 129
+  - type: blit
+childScenes:
+  - id: 3
+    startActive: true
+  - id: 6
+    startActive: false
+cppScripts:
+  - path: scripts/LevelController.cpp
+    headerPath: scripts/LevelController.h
+    className: LevelController
+    properties:
+      - name: sceneName
+        isPtr: false
+      - name: levelTitle
+        isPtr: false
+      - name: nextScene
+        isPtr: false
+      - name: levelWidth
+        isPtr: false
+      - name: levelHeight
+        isPtr: false
+      - name: cameraSmoothing
+        isPtr: false
+      - name: backgroundParallax
+        isPtr: false
+      - name: spawnPoint
+        isPtr: true
+        ptrTypeName: doriax::Object
+  - path: scripts/ExitDoor.cpp
+    headerPath: scripts/ExitDoor.h
+    className: ExitDoor
+    properties:
+      - name: needsKey
+        isPtr: false
+  - path: scripts/Collectible.cpp
+    headerPath: scripts/Collectible.h
+    className: Collectible
+    properties:
+      - name: kind
+        isPtr: false
+      - name: scoreValue
+        isPtr: false
+      - name: bobHeight
+        isPtr: false
+      - name: bobSpeed
+        isPtr: false
+  - path: scripts/Enemy.cpp
+    headerPath: scripts/Enemy.h
+    className: Enemy
+    properties:
+      - name: speed
+        isPtr: false
+      - name: patrolDistance
+        isPtr: false
+      - name: flying
+        isPtr: false
+      - name: hoverHeight
+        isPtr: false
+      - name: hoverSpeed
+        isPtr: false
+      - name: canStomp
+        isPtr: false
+      - name: stompHeight
+        isPtr: false
+      - name: scoreValue
+        isPtr: false
+      - name: spriteFacesRight
+        isPtr: false
+  - path: scripts/PlayerController.cpp
+    headerPath: scripts/PlayerController.h
+    className: PlayerController
+    properties:
+      - name: moveSpeed
+        isPtr: false
+      - name: jumpSpeed
+        isPtr: false
+      - name: maxFallSpeed
+        isPtr: false
+      - name: coyoteTime
+        isPtr: false
+      - name: jumpBufferTime
+        isPtr: false
+      - name: hurtInvulnerability
+        isPtr: false
+      - name: stompBounce
+        isPtr: false
+      - name: walkFrameTime
+        isPtr: false
+      - name: colliderWidth
+        isPtr: false
+      - name: fallDeathY
+        isPtr: false
+bundles:
+  - bundles/Bee.bundle
+  - bundles/Coin.bundle
+  - bundles/Door.bundle
+  - bundles/Gem.bundle
+  - bundles/Key.bundle
+  - bundles/Player.bundle
+  - bundles/Saw.bundle
+  - bundles/Slime.bundle
+  - bundles/Sounds.bundle
+entities:
+  - type: Entity
+    entity: 1001
+    name: Level
+    components:
+      script:
+        scripts:
+          - type: cpp
+            path: scripts/LevelController.cpp
+            headerPath: scripts/LevelController.h
+            className: LevelController
+            enabled: true
+            properties:
+              - name: sceneName
+                displayName: Scene Name
+                type: String
+                value: Level Three
+                defaultValue: Level One
+              - name: levelTitle
+                displayName: Level Title
+                type: String
+                value: Mushroom Peaks
+                defaultValue: Green Hills
+              - name: nextScene
+                displayName: Next Scene
+                type: String
+                value: Win Scene
+                defaultValue: Level Two
+              - name: levelWidth
+                displayName: Level Width
+                type: Float
+                value: 5120
+                defaultValue: 3840
+              - name: levelHeight
+                displayName: Level Height
+                type: Float
+                value: 896
+                defaultValue: 896
+              - name: cameraSmoothing
+                displayName: Camera Smoothing
+                type: Float
+                value: 8
+                defaultValue: 8
+              - name: backgroundParallax
+                displayName: Background Parallax
+                type: Float
+                value: 0.3
+                defaultValue: 0.3
+              - name: spawnPoint
+                displayName: Spawn Point
+                type: EntityReference
+                ptrTypeName: doriax::Object
+                value: 1002
+                defaultValue: 0
+  - type: Entity
+    entity: 1003
+    name: Sounds
+    components:
+      bundle:
+        name: Sounds
+        path: bundles/Sounds.bundle
+  - type: Entity
+    entity: 1004
+    name: Background
+    components:
+      transform:
+        position: [0, 0, -5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, -5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, -5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, -5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      mesh:
+        submeshes:
+          - material:
+              baseColorFactor: [1, 1, 1, 1]
+              metallicFactor: 1
+              roughnessFactor: 1
+              alphaCutoff: 0.5
+              foliageTransmission: 0
+              alphaMode: AUTO
+              emissiveFactor: [0, 0, 0]
+              baseColorTexture:
+                textureType: 2D
+                source: path
+                path: backgrounds/backgrounds.png
+                minFilter: linear
+                magFilter: linear
+                wrapU: clamp_to_edge
+                wrapV: clamp_to_edge
+                releaseDataAfterLoad: true
+              baseColorTexCoord: 0
+              metallicRoughnessTexCoord: 0
+              occlusionTexCoord: 0
+              emissiveTexCoord: 0
+              normalTexCoord: 0
+              name: ""
+            textureRect: [0, 0, 1, 1]
+            primitiveType: triangles
+            vertexCount: 288
+            faceCulling: true
+            textureShadow: false
+            hasTexCoord1: true
+            hasTexCoord2: false
+            hasNormalMap: false
+            hasTangent: true
+            hasVertexColor3: false
+            hasVertexColor4: true
+            hasTextureRect: true
+            hasSkinning: false
+            hasMorphTarget: false
+            hasMorphNormal: false
+            hasMorphTangent: false
+        normAdjustJoint: 1
+        normAdjustWeight: 1
+        morphWeights: [0, 0, 0, 0, 0, 0, 0, 0]
+        aabb:
+          min: [0, 0, 0]
+          max: [3072, 1024, 0]
+        verticesAABB:
+          min: [0, 0, 0]
+          max: [3072, 1024, 0]
+        worldAABB:
+          min: [0, 0, -5]
+          max: [3072, 1024, -5]
+        receiveLights: false
+        receiveIBL: false
+        castShadows: false
+        receiveShadows: false
+        lodEnabled: true
+        lodBias: 1
+        renderInReflectionProbes: true
+        shadowsBillboard: false
+        transparent: true
+        cullingMode: back
+        windingOrder: ccw
+      tilemap:
+        width: 3072
+        height: 1024
+        automaticFlipY: true
+        flipY: true
+        textureScaleFactor: 0.5
+        reserveTiles: 32
+        tilesRect:
+          - name: background_clouds
+            submeshId: 0
+            rect: [0, 0, 256, 256]
+          - name: background_color_mushrooms
+            submeshId: 0
+            rect: [771, 0, 256, 256]
+          - name: background_fade_mushrooms
+            submeshId: 0
+            rect: [771, 257, 256, 256]
+          - name: background_solid_sky
+            submeshId: 0
+            rect: [257, 771, 256, 256]
+        tiles:
+          - name: background_color_mushrooms
+            rectId: 1
+            position: [0, 0]
+            width: 256
+            height: 256
+          - name: background_color_mushrooms
+            rectId: 1
+            position: [256, 0]
+            width: 256
+            height: 256
+          - name: background_color_mushrooms
+            rectId: 1
+            position: [512, 0]
+            width: 256
+            height: 256
+          - name: background_color_mushrooms
+            rectId: 1
+            position: [768, 0]
+            width: 256
+            height: 256
+          - name: background_color_mushrooms
+            rectId: 1
+            position: [1024, 0]
+            width: 256
+            height: 256
+          - name: background_color_mushrooms
+            rectId: 1
+            position: [1280, 0]
+            width: 256
+            height: 256
+          - name: background_color_mushrooms
+            rectId: 1
+            position: [1536, 0]
+            width: 256
+            height: 256
+          - name: background_color_mushrooms
+            rectId: 1
+            position: [1792, 0]
+            width: 256
+            height: 256
+          - name: background_color_mushrooms
+            rectId: 1
+            position: [2048, 0]
+            width: 256
+            height: 256
+          - name: background_color_mushrooms
+            rectId: 1
+            position: [2304, 0]
+            width: 256
+            height: 256
+          - name: background_color_mushrooms
+            rectId: 1
+            position: [2560, 0]
+            width: 256
+            height: 256
+          - name: background_color_mushrooms
+            rectId: 1
+            position: [2816, 0]
+            width: 256
+            height: 256
+          - name: background_fade_mushrooms
+            rectId: 2
+            position: [0, 256]
+            width: 256
+            height: 256
+          - name: background_fade_mushrooms
+            rectId: 2
+            position: [256, 256]
+            width: 256
+            height: 256
+          - name: background_fade_mushrooms
+            rectId: 2
+            position: [512, 256]
+            width: 256
+            height: 256
+          - name: background_fade_mushrooms
+            rectId: 2
+            position: [768, 256]
+            width: 256
+            height: 256
+          - name: background_fade_mushrooms
+            rectId: 2
+            position: [1024, 256]
+            width: 256
+            height: 256
+          - name: background_fade_mushrooms
+            rectId: 2
+            position: [1280, 256]
+            width: 256
+            height: 256
+          - name: background_fade_mushrooms
+            rectId: 2
+            position: [1536, 256]
+            width: 256
+            height: 256
+          - name: background_fade_mushrooms
+            rectId: 2
+            position: [1792, 256]
+            width: 256
+            height: 256
+          - name: background_fade_mushrooms
+            rectId: 2
+            position: [2048, 256]
+            width: 256
+            height: 256
+          - name: background_fade_mushrooms
+            rectId: 2
+            position: [2304, 256]
+            width: 256
+            height: 256
+          - name: background_fade_mushrooms
+            rectId: 2
+            position: [2560, 256]
+            width: 256
+            height: 256
+          - name: background_fade_mushrooms
+            rectId: 2
+            position: [2816, 256]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [0, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [256, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [512, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [768, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [1024, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [1280, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [1536, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [1792, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [2048, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [2304, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [2560, 512]
+            width: 256
+            height: 256
+          - name: background_clouds
+            rectId: 0
+            position: [2816, 512]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [0, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [256, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [512, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [768, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [1024, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [1280, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [1536, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [1792, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [2048, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [2304, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [2560, 768]
+            width: 256
+            height: 256
+          - name: background_solid_sky
+            rectId: 3
+            position: [2816, 768]
+            width: 256
+            height: 256
+  - type: Entity
+    entity: 1005
+    name: Terrain
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      mesh:
+        submeshes:
+          - material:
+              baseColorFactor: [1, 1, 1, 1]
+              metallicFactor: 1
+              roughnessFactor: 1
+              alphaCutoff: 0.5
+              foliageTransmission: 0
+              alphaMode: AUTO
+              emissiveFactor: [0, 0, 0]
+              baseColorTexture:
+                textureType: 2D
+                source: path
+                path: tiles/tileset.png
+                minFilter: linear
+                magFilter: linear
+                wrapU: clamp_to_edge
+                wrapV: clamp_to_edge
+                releaseDataAfterLoad: true
+              baseColorTexCoord: 0
+              metallicRoughnessTexCoord: 0
+              occlusionTexCoord: 0
+              emissiveTexCoord: 0
+              normalTexCoord: 0
+              name: ""
+            textureRect: [0, 0, 1, 1]
+            primitiveType: triangles
+            vertexCount: 2448
+            faceCulling: true
+            textureShadow: false
+            hasTexCoord1: true
+            hasTexCoord2: false
+            hasNormalMap: false
+            hasTangent: true
+            hasVertexColor3: false
+            hasVertexColor4: true
+            hasTextureRect: true
+            hasSkinning: false
+            hasMorphTarget: false
+            hasMorphNormal: false
+            hasMorphTangent: false
+        normAdjustJoint: 1
+        normAdjustWeight: 1
+        morphWeights: [0, 0, 0, 0, 0, 0, 0, 0]
+        aabb:
+          min: [0, 0, 0]
+          max: [5120, 768, 0]
+        verticesAABB:
+          min: [0, 0, 0]
+          max: [5120, 768, 0]
+        worldAABB:
+          min: [0, 0, 0]
+          max: [5120, 768, 0]
+        receiveLights: false
+        receiveIBL: false
+        castShadows: false
+        receiveShadows: false
+        lodEnabled: true
+        lodBias: 1
+        renderInReflectionProbes: true
+        shadowsBillboard: false
+        transparent: true
+        cullingMode: back
+        windingOrder: ccw
+      tilemap:
+        width: 5120
+        height: 768
+        automaticFlipY: true
+        flipY: true
+        textureScaleFactor: 0.5
+        reserveTiles: 32
+        tilesRect:
+          - name: bush
+            submeshId: 0
+            rect: [845, 65, 64, 64]
+          - name: cactus
+            submeshId: 0
+            rect: [910, 65, 64, 64]
+          - name: fence
+            submeshId: 0
+            rect: [585, 130, 64, 64]
+          - name: grass
+            submeshId: 0
+            rect: [455, 195, 64, 64]
+          - name: hill
+            submeshId: 0
+            rect: [650, 195, 64, 64]
+          - name: hill_top
+            submeshId: 0
+            rect: [715, 195, 64, 64]
+          - name: ladder_middle
+            submeshId: 0
+            rect: [780, 325, 64, 64]
+          - name: mushroom_red
+            submeshId: 0
+            rect: [455, 390, 64, 64]
+          - name: rock
+            submeshId: 0
+            rect: [585, 390, 64, 64]
+          - name: sign
+            submeshId: 0
+            rect: [845, 390, 64, 64]
+          - name: sign_exit
+            submeshId: 0
+            rect: [910, 390, 64, 64]
+          - name: snow
+            submeshId: 0
+            rect: [1105, 390, 64, 64]
+          - name: spikes
+            submeshId: 0
+            rect: [0, 455, 64, 64]
+          - name: terrain_purple_block
+            submeshId: 0
+            rect: [910, 650, 64, 64]
+          - name: terrain_purple_block_bottom
+            submeshId: 0
+            rect: [975, 650, 64, 64]
+          - name: terrain_purple_block_bottom_left
+            submeshId: 0
+            rect: [1040, 650, 64, 64]
+          - name: terrain_purple_block_bottom_right
+            submeshId: 0
+            rect: [1105, 650, 64, 64]
+          - name: terrain_purple_block_center
+            submeshId: 0
+            rect: [0, 715, 64, 64]
+          - name: terrain_purple_block_left
+            submeshId: 0
+            rect: [65, 715, 64, 64]
+          - name: terrain_purple_block_right
+            submeshId: 0
+            rect: [130, 715, 64, 64]
+          - name: terrain_purple_block_top
+            submeshId: 0
+            rect: [195, 715, 64, 64]
+          - name: terrain_purple_block_top_left
+            submeshId: 0
+            rect: [260, 715, 64, 64]
+          - name: terrain_purple_block_top_right
+            submeshId: 0
+            rect: [325, 715, 64, 64]
+          - name: terrain_purple_cloud
+            submeshId: 0
+            rect: [390, 715, 64, 64]
+          - name: terrain_purple_cloud_background
+            submeshId: 0
+            rect: [455, 715, 64, 64]
+          - name: terrain_purple_cloud_left
+            submeshId: 0
+            rect: [520, 715, 64, 64]
+          - name: terrain_purple_cloud_middle
+            submeshId: 0
+            rect: [585, 715, 64, 64]
+          - name: terrain_purple_cloud_right
+            submeshId: 0
+            rect: [650, 715, 64, 64]
+          - name: terrain_purple_horizontal_left
+            submeshId: 0
+            rect: [715, 715, 64, 64]
+          - name: terrain_purple_horizontal_middle
+            submeshId: 0
+            rect: [780, 715, 64, 64]
+          - name: terrain_purple_horizontal_overhang_left
+            submeshId: 0
+            rect: [845, 715, 64, 64]
+          - name: terrain_purple_horizontal_overhang_right
+            submeshId: 0
+            rect: [910, 715, 64, 64]
+          - name: terrain_purple_horizontal_right
+            submeshId: 0
+            rect: [975, 715, 64, 64]
+          - name: terrain_purple_ramp_long_a
+            submeshId: 0
+            rect: [1040, 715, 64, 64]
+          - name: terrain_purple_ramp_long_b
+            submeshId: 0
+            rect: [1105, 715, 64, 64]
+          - name: terrain_purple_ramp_long_c
+            submeshId: 0
+            rect: [0, 780, 64, 64]
+          - name: terrain_purple_ramp_short_a
+            submeshId: 0
+            rect: [65, 780, 64, 64]
+          - name: terrain_purple_ramp_short_b
+            submeshId: 0
+            rect: [130, 780, 64, 64]
+          - name: terrain_purple_vertical_bottom
+            submeshId: 0
+            rect: [195, 780, 64, 64]
+          - name: terrain_purple_vertical_middle
+            submeshId: 0
+            rect: [260, 780, 64, 64]
+          - name: terrain_purple_vertical_top
+            submeshId: 0
+            rect: [325, 780, 64, 64]
+          - name: water
+            submeshId: 0
+            rect: [195, 1105, 64, 64]
+          - name: water_top
+            submeshId: 0
+            rect: [260, 1105, 64, 64]
+          - name: water_top_low
+            submeshId: 0
+            rect: [325, 1105, 64, 64]
+        tiles:
+          - name: terrain_purple_horizontal_left
+            rectId: 28
+            position: [3584, 704]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [3648, 704]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_right
+            rectId: 32
+            position: [3712, 704]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_left
+            rectId: 28
+            position: [1600, 640]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [1664, 640]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_right
+            rectId: 32
+            position: [1728, 640]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_left
+            rectId: 28
+            position: [4800, 640]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [4864, 640]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_right
+            rectId: 32
+            position: [4928, 640]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_left
+            rectId: 28
+            position: [704, 512]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [768, 512]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [832, 512]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [896, 512]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_right
+            rectId: 32
+            position: [960, 512]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_left
+            rectId: 28
+            position: [3456, 512]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [3520, 512]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [3584, 512]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [3648, 512]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_right
+            rectId: 32
+            position: [3712, 512]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_left
+            rectId: 28
+            position: [1472, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [1536, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [1600, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [1664, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_right
+            rectId: 32
+            position: [1728, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_left
+            rectId: 28
+            position: [2816, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [2880, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [2944, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [3008, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_right
+            rectId: 32
+            position: [3072, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_left
+            rectId: 28
+            position: [4160, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_right
+            rectId: 32
+            position: [4224, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_left
+            rectId: 28
+            position: [4608, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [4672, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [4736, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_middle
+            rectId: 29
+            position: [4800, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_horizontal_right
+            rectId: 32
+            position: [4864, 448]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_left
+            rectId: 21
+            position: [2048, 384]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [2112, 384]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [2176, 384]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [2240, 384]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_right
+            rectId: 22
+            position: [2304, 384]
+            width: 64
+            height: 64
+          - name: mushroom_red
+            rectId: 7
+            position: [320, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_left
+            rectId: 21
+            position: [640, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [704, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [768, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [832, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [896, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [960, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_right
+            rectId: 22
+            position: [1024, 320]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [1536, 320]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [1600, 320]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [1664, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [2048, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2112, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2176, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2240, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [2304, 320]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [2880, 320]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [2944, 320]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [3008, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_left
+            rectId: 21
+            position: [3328, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [3392, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [3456, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [3520, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [3584, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [3648, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_right
+            rectId: 22
+            position: [3712, 320]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [4672, 320]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [4736, 320]
+            width: 64
+            height: 64
+          - name: spikes
+            rectId: 12
+            position: [4800, 320]
+            width: 64
+            height: 64
+          - name: sign_exit
+            rectId: 10
+            position: [4928, 320]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [0, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [64, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [128, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [192, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [256, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [320, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_right
+            rectId: 22
+            position: [384, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [640, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [704, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [768, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [832, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [896, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [960, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [1024, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_left
+            rectId: 21
+            position: [1280, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [1344, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [1408, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [1472, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [1536, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [1600, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [1664, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [1728, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_right
+            rectId: 22
+            position: [1792, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [2048, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2112, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2176, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2240, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [2304, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_left
+            rectId: 21
+            position: [2560, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [2624, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [2688, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [2752, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [2816, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [2880, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [2944, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [3008, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_right
+            rectId: 22
+            position: [3072, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [3328, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3392, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3456, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3520, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3584, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3648, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [3712, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_left
+            rectId: 21
+            position: [3968, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [4032, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [4096, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [4160, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_right
+            rectId: 22
+            position: [4224, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top_left
+            rectId: 21
+            position: [4480, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [4544, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [4608, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [4672, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [4736, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [4800, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [4864, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [4928, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [4992, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_top
+            rectId: 20
+            position: [5056, 256]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [0, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [64, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [128, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [192, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [256, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [320, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [384, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [640, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [704, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [768, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [832, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [896, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [960, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [1024, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [1280, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1344, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1408, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1472, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1536, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1600, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1664, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1728, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [1792, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [2048, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2112, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2176, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2240, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [2304, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [2560, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2624, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2688, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2752, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2816, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2880, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2944, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3008, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [3072, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [3328, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3392, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3456, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3520, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3584, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3648, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [3712, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [3968, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4032, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4096, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4160, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [4224, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [4480, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4544, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4608, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4672, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4736, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4800, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4864, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4928, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4992, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [5056, 192]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [0, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [64, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [128, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [192, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [256, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [320, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [384, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [640, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [704, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [768, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [832, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [896, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [960, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [1024, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [1280, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1344, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1408, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1472, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1536, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1600, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1664, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1728, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [1792, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [2048, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2112, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2176, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2240, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [2304, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [2560, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2624, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2688, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2752, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2816, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2880, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2944, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3008, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [3072, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [3328, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3392, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3456, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3520, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3584, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3648, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [3712, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [3968, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4032, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4096, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4160, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [4224, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [4480, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4544, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4608, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4672, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4736, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4800, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4864, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4928, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4992, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [5056, 128]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [0, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [64, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [128, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [192, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [256, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [320, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [384, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [448, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [512, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [576, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [640, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [704, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [768, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [832, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [896, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [960, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [1024, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [1088, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [1152, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [1216, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [1280, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1344, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1408, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1472, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1536, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1600, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1664, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1728, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [1792, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [1856, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [1920, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [1984, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [2048, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2112, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2176, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2240, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [2304, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [2368, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [2432, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [2496, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [2560, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2624, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2688, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2752, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2816, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2880, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2944, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3008, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [3072, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [3136, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [3200, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [3264, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [3328, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3392, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3456, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3520, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3584, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3648, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [3712, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [3776, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [3840, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [3904, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [3968, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4032, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4096, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4160, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [4224, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [4288, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [4352, 64]
+            width: 64
+            height: 64
+          - name: water_top
+            rectId: 42
+            position: [4416, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [4480, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4544, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4608, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4672, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4736, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4800, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4864, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4928, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4992, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [5056, 64]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [0, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [64, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [128, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [192, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [256, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [320, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [384, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [448, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [512, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [576, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [640, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [704, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [768, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [832, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [896, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [960, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [1024, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [1088, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [1152, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [1216, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [1280, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1344, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1408, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1472, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1536, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1600, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1664, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [1728, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [1792, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [1856, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [1920, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [1984, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [2048, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2112, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2176, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2240, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [2304, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [2368, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [2432, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [2496, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [2560, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2624, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2688, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2752, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2816, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2880, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [2944, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3008, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [3072, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [3136, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [3200, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [3264, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [3328, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3392, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3456, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3520, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3584, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [3648, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [3712, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [3776, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [3840, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [3904, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [3968, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4032, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4096, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4160, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_right
+            rectId: 19
+            position: [4224, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [4288, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [4352, 0]
+            width: 64
+            height: 64
+          - name: water
+            rectId: 41
+            position: [4416, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_left
+            rectId: 18
+            position: [4480, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4544, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4608, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4672, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4736, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4800, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4864, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4928, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [4992, 0]
+            width: 64
+            height: 64
+          - name: terrain_purple_block_center
+            rectId: 17
+            position: [5056, 0]
+            width: 64
+            height: 64
+  - type: Entity
+    entity: 1006
+    name: Terrain Collider 1
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      body2d:
+        type: static
+        numShapes: 10
+        shapes:
+          - type: polygon
+            pointA: [3584, 704]
+            pointB: [3776, 768]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [3584, 704]
+              - [3776, 704]
+              - [3776, 768]
+              - [3584, 768]
+          - type: polygon
+            pointA: [1600, 640]
+            pointB: [1792, 704]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [1600, 640]
+              - [1792, 640]
+              - [1792, 704]
+              - [1600, 704]
+          - type: polygon
+            pointA: [4800, 640]
+            pointB: [4992, 704]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [4800, 640]
+              - [4992, 640]
+              - [4992, 704]
+              - [4800, 704]
+          - type: polygon
+            pointA: [704, 512]
+            pointB: [1024, 576]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [704, 512]
+              - [1024, 512]
+              - [1024, 576]
+              - [704, 576]
+          - type: polygon
+            pointA: [3456, 512]
+            pointB: [3776, 576]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [3456, 512]
+              - [3776, 512]
+              - [3776, 576]
+              - [3456, 576]
+          - type: polygon
+            pointA: [1472, 448]
+            pointB: [1792, 512]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [1472, 448]
+              - [1792, 448]
+              - [1792, 512]
+              - [1472, 512]
+          - type: polygon
+            pointA: [2816, 448]
+            pointB: [3136, 512]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [2816, 448]
+              - [3136, 448]
+              - [3136, 512]
+              - [2816, 512]
+          - type: polygon
+            pointA: [4160, 448]
+            pointB: [4288, 512]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [4160, 448]
+              - [4288, 448]
+              - [4288, 512]
+              - [4160, 512]
+          - type: polygon
+            pointA: [4608, 448]
+            pointB: [4928, 512]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: true
+            sensorEvents: false
+            categoryBits: 64
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [4608, 448]
+              - [4928, 448]
+              - [4928, 512]
+              - [4608, 512]
+          - type: polygon
+            pointA: [2048, 0]
+            pointB: [2368, 448]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [2048, 0]
+              - [2368, 0]
+              - [2368, 448]
+              - [2048, 448]
+  - type: Entity
+    entity: 1007
+    name: Terrain Collider 2
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      body2d:
+        type: static
+        numShapes: 7
+        shapes:
+          - type: polygon
+            pointA: [640, 0]
+            pointB: [1088, 384]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [640, 0]
+              - [1088, 0]
+              - [1088, 384]
+              - [640, 384]
+          - type: polygon
+            pointA: [3328, 0]
+            pointB: [3776, 384]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [3328, 0]
+              - [3776, 0]
+              - [3776, 384]
+              - [3328, 384]
+          - type: polygon
+            pointA: [0, 0]
+            pointB: [448, 320]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [0, 0]
+              - [448, 0]
+              - [448, 320]
+              - [0, 320]
+          - type: polygon
+            pointA: [1280, 0]
+            pointB: [1856, 320]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [1280, 0]
+              - [1856, 0]
+              - [1856, 320]
+              - [1280, 320]
+          - type: polygon
+            pointA: [2560, 0]
+            pointB: [3136, 320]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [2560, 0]
+              - [3136, 0]
+              - [3136, 320]
+              - [2560, 320]
+          - type: polygon
+            pointA: [3968, 0]
+            pointB: [4288, 320]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [3968, 0]
+              - [4288, 0]
+              - [4288, 320]
+              - [3968, 320]
+          - type: polygon
+            pointA: [4480, 0]
+            pointB: [5120, 320]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [4480, 0]
+              - [5120, 0]
+              - [5120, 320]
+              - [4480, 320]
+  - type: Entity
+    entity: 1008
+    name: Hazards 1
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      body2d:
+        type: static
+        numShapes: 9
+        shapes:
+          - type: polygon
+            pointA: [1542, 322]
+            pointB: [1594, 350]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [1542, 322]
+              - [1594, 322]
+              - [1594, 350]
+              - [1542, 350]
+          - type: polygon
+            pointA: [1606, 322]
+            pointB: [1658, 350]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [1606, 322]
+              - [1658, 322]
+              - [1658, 350]
+              - [1606, 350]
+          - type: polygon
+            pointA: [1670, 322]
+            pointB: [1722, 350]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [1670, 322]
+              - [1722, 322]
+              - [1722, 350]
+              - [1670, 350]
+          - type: polygon
+            pointA: [2886, 322]
+            pointB: [2938, 350]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [2886, 322]
+              - [2938, 322]
+              - [2938, 350]
+              - [2886, 350]
+          - type: polygon
+            pointA: [2950, 322]
+            pointB: [3002, 350]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [2950, 322]
+              - [3002, 322]
+              - [3002, 350]
+              - [2950, 350]
+          - type: polygon
+            pointA: [3014, 322]
+            pointB: [3066, 350]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [3014, 322]
+              - [3066, 322]
+              - [3066, 350]
+              - [3014, 350]
+          - type: polygon
+            pointA: [4678, 322]
+            pointB: [4730, 350]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [4678, 322]
+              - [4730, 322]
+              - [4730, 350]
+              - [4678, 350]
+          - type: polygon
+            pointA: [4742, 322]
+            pointB: [4794, 350]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [4742, 322]
+              - [4794, 322]
+              - [4794, 350]
+              - [4742, 350]
+          - type: polygon
+            pointA: [4806, 322]
+            pointB: [4858, 350]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: true
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: true
+            categoryBits: 4
+            maskBits: 65535
+            groupIndex: 0
+            vertices:
+              - [4806, 322]
+              - [4858, 322]
+              - [4858, 350]
+              - [4806, 350]
+  - type: Entity
+    entity: 1002
+    name: Spawn Point
+    components:
+      transform:
+        position: [160, 320, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [160, 320, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [160, 320, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [160, 320, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+  - type: Entity
+    entity: 1009
+    name: Door
+    components:
+      transform:
+        position: [5024, 320, 0.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [5024, 320, 0.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [5024, 320, 0.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [5024, 320, 0.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Door
+        path: bundles/Door.bundle
+  - type: Entity
+    entity: 1010
+    name: Gem
+    components:
+      transform:
+        position: [3680, 800, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3680, 800, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3680, 800, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3680, 800, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Gem
+        path: bundles/Gem.bundle
+  - type: Entity
+    entity: 1011
+    name: Gem 2
+    components:
+      transform:
+        position: [1696, 736, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [1696, 736, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1696, 736, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1696, 736, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Gem
+        path: bundles/Gem.bundle
+  - type: Entity
+    entity: 1013
+    name: Key
+    components:
+      transform:
+        position: [4896, 736, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [4896, 736, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4896, 736, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4896, 736, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Key
+        path: bundles/Key.bundle
+  - type: Entity
+    entity: 1014
+    name: Coin
+    components:
+      transform:
+        position: [736, 608, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [736, 608, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [736, 608, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [736, 608, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1015
+    name: Coin 2
+    components:
+      transform:
+        position: [864, 608, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [864, 608, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [864, 608, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [864, 608, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1018
+    name: Coin 3
+    components:
+      transform:
+        position: [992, 608, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [992, 608, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [992, 608, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [992, 608, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1021
+    name: Coin 4
+    components:
+      transform:
+        position: [3488, 608, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3488, 608, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3488, 608, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3488, 608, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1024
+    name: Coin 5
+    components:
+      transform:
+        position: [3616, 608, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3616, 608, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3616, 608, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3616, 608, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1027
+    name: Coin 6
+    components:
+      transform:
+        position: [3744, 608, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3744, 608, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3744, 608, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3744, 608, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1030
+    name: Coin 7
+    components:
+      transform:
+        position: [1504, 544, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [1504, 544, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1504, 544, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1504, 544, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1033
+    name: Coin 8
+    components:
+      transform:
+        position: [1632, 544, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [1632, 544, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1632, 544, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1632, 544, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1036
+    name: Coin 9
+    components:
+      transform:
+        position: [1760, 544, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [1760, 544, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1760, 544, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1760, 544, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1039
+    name: Coin 10
+    components:
+      transform:
+        position: [2848, 544, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [2848, 544, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2848, 544, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2848, 544, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1042
+    name: Coin 11
+    components:
+      transform:
+        position: [2976, 544, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [2976, 544, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2976, 544, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2976, 544, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1045
+    name: Coin 12
+    components:
+      transform:
+        position: [3104, 544, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3104, 544, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3104, 544, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3104, 544, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1048
+    name: Coin 13
+    components:
+      transform:
+        position: [4192, 544, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [4192, 544, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4192, 544, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4192, 544, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1051
+    name: Coin 14
+    components:
+      transform:
+        position: [4320, 544, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [4320, 544, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4320, 544, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4320, 544, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1054
+    name: Coin 15
+    components:
+      transform:
+        position: [4640, 544, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [4640, 544, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4640, 544, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4640, 544, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1057
+    name: Coin 16
+    components:
+      transform:
+        position: [4768, 544, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [4768, 544, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4768, 544, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4768, 544, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1060
+    name: Coin 17
+    components:
+      transform:
+        position: [2080, 480, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [2080, 480, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2080, 480, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2080, 480, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1063
+    name: Coin 18
+    components:
+      transform:
+        position: [2208, 480, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [2208, 480, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2208, 480, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2208, 480, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1066
+    name: Coin 19
+    components:
+      transform:
+        position: [2336, 480, 1]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [2336, 480, 1]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2336, 480, 1, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2336, 480, 1, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Coin
+        path: bundles/Coin.bundle
+  - type: Entity
+    entity: 1069
+    name: Bee
+    components:
+      transform:
+        position: [3040, 704, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3040, 704, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3040, 704, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3040, 704, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Bee
+        path: bundles/Bee.bundle
+  - type: Entity
+    entity: 1070
+    name: Bee 2
+    components:
+      transform:
+        position: [4256, 704, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [4256, 704, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4256, 704, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4256, 704, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Bee
+        path: bundles/Bee.bundle
+  - type: Entity
+    entity: 1073
+    name: Saw
+    components:
+      transform:
+        position: [2208, 672, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [2208, 672, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2208, 672, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2208, 672, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Saw
+        path: bundles/Saw.bundle
+  - type: Entity
+    entity: 1074
+    name: Slime
+    components:
+      transform:
+        position: [864, 384, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [864, 384, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [864, 384, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [864, 384, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Slime
+        path: bundles/Slime.bundle
+  - type: Entity
+    entity: 1075
+    name: Slime 2
+    components:
+      transform:
+        position: [3552, 384, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [3552, 384, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3552, 384, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [3552, 384, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Slime
+        path: bundles/Slime.bundle
+  - type: Entity
+    entity: 1078
+    name: Saw 2
+    components:
+      transform:
+        position: [4256, 416, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [4256, 416, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4256, 416, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [4256, 416, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Saw
+        path: bundles/Saw.bundle
+  - type: Entity
+    entity: 1081
+    name: Slime 3
+    components:
+      transform:
+        position: [1760, 320, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [1760, 320, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1760, 320, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [1760, 320, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Slime
+        path: bundles/Slime.bundle
+  - type: Entity
+    entity: 1084
+    name: Slime 4
+    components:
+      transform:
+        position: [2784, 320, 1.5]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [2784, 320, 1.5]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2784, 320, 1.5, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [2784, 320, 1.5, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Slime
+        path: bundles/Slime.bundle
+  - type: Entity
+    entity: 1087
+    name: Player
+    components:
+      transform:
+        position: [160, 320, 2]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [160, 320, 2]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [160, 320, 2, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [160, 320, 2, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      bundle:
+        name: Player
+        path: bundles/Player.bundle

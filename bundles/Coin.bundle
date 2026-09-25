@@ -1,0 +1,144 @@
+type: Entity
+entity: 141
+name: Coin
+components:
+  transform:
+    position: [0, 0, 0]
+    rotation: [1, 0, 0, 0]
+    scale: [1, 1, 1]
+    visible: true
+  mesh:
+    submeshes:
+      - material:
+          baseColorFactor: [1, 1, 1, 1]
+          metallicFactor: 1
+          roughnessFactor: 1
+          alphaCutoff: 0.5
+          alphaMode: AUTO
+          emissiveFactor: [0, 0, 0]
+          baseColorTexture:
+            textureType: "2D"
+            source: path
+            path: tiles/tileset.png
+            minFilter: linear
+            magFilter: linear
+            wrapU: clamp_to_edge
+            wrapV: clamp_to_edge
+            releaseDataAfterLoad: true
+          baseColorTexCoord: 0
+          metallicRoughnessTexCoord: 0
+          occlusionTexCoord: 0
+          emissiveTexCoord: 0
+          normalTexCoord: 0
+          name: ""
+        textureRect: [0, 0.111206, 0.054748, 0.054748]
+        primitiveType: triangles
+        vertexCount: 0
+        faceCulling: false
+        textureShadow: true
+        hasTexCoord1: true
+        hasTexCoord2: false
+        hasNormalMap: false
+        hasTangent: true
+        hasVertexColor3: false
+        hasVertexColor4: true
+        hasTextureRect: true
+        hasSkinning: false
+        hasMorphTarget: false
+        hasMorphNormal: false
+        hasMorphTangent: false
+    normAdjustJoint: 1
+    normAdjustWeight: 1
+    morphWeights: [0, 0, 0, 0, 0, 0, 0, 0]
+    aabb:
+      min: [-32, -32, 0]
+      max: [32, 32, 0]
+    verticesAABB:
+      min: [-32, -32, 0]
+      max: [32, 32, 0]
+    worldAABB:
+      min: [-32, -32, 0]
+      max: [32, 32, 0]
+    receiveLights: false
+    receiveIBL: false
+    castShadows: false
+    receiveShadows: false
+    renderInReflectionProbes: true
+    shadowsBillboard: false
+    transparent: true
+    cullingMode: back
+    windingOrder: ccw
+  sprite:
+    width: 64
+    height: 64
+    automaticFlipY: true
+    flipY: true
+    textureScaleFactor: 0.5
+    pivotPreset: center
+    framesRect:
+      - name: front
+        rect: [0, 130, 64, 64]
+      - name: side
+        rect: [65, 130, 64, 64]
+  body2d:
+    type: static
+    numShapes: 1
+    shapes:
+      - type: circle
+        pointA: [0, 0]
+        pointB: [0, 0]
+        radius: 22
+        loop: false
+        density: 1
+        friction: 0.6
+        restitution: 0
+        sensor: true
+        enableHitEvents: false
+        contactEvents: false
+        preSolveEvents: false
+        sensorEvents: true
+        categoryBits: 16
+        maskBits: 65535
+        groupIndex: 0
+        vertices: []
+  script:
+    scripts:
+      - type: cpp
+        path: scripts/Collectible.cpp
+        headerPath: scripts/Collectible.h
+        className: Collectible
+        enabled: true
+        properties:
+          - name: kind
+            displayName: Kind
+            type: String
+            value: coin
+            defaultValue: coin
+          - name: scoreValue
+            displayName: Score Value
+            type: Int
+            value: 10
+            defaultValue: 10
+children:
+  - type: Entity
+    entity: 142
+    name: Spin Animation
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        visible: true
+      action:
+        state: Running
+        speed: 1
+        target: 141
+        ownedTarget: false
+      spriteanimation:
+        loop: true
+        frames:
+          - 0
+          - 1
+        framesTime:
+          - 280
+          - 140

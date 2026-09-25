@@ -1,0 +1,288 @@
+type: Entity
+entity: 101
+name: Hero
+components:
+  transform:
+    position: [0, 0, 0]
+    rotation: [1, 0, 0, 0]
+    scale: [1, 1, 1]
+    worldPosition: [0, 0, 0]
+    worldRotation: [1, 0, 0, 0]
+    worldScale: [1, 1, 1]
+    localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+    modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+    normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+    visible: true
+    billboardRotation: [1, 0, 0, 0]
+    billboard: false
+    fakeBillboard: false
+    cylindricalBillboard: false
+  mesh:
+    submeshes:
+      - material:
+          baseColorFactor: [1, 1, 1, 1]
+          metallicFactor: 1
+          roughnessFactor: 1
+          alphaCutoff: 0.5
+          foliageTransmission: 0
+          alphaMode: AUTO
+          emissiveFactor: [0, 0, 0]
+          baseColorTexture:
+            textureType: 2D
+            source: path
+            path: sprites/characters.png
+            minFilter: linear
+            magFilter: linear
+            wrapU: clamp_to_edge
+            wrapV: clamp_to_edge
+            releaseDataAfterLoad: true
+          baseColorTexCoord: 0
+          metallicRoughnessTexCoord: 0
+          occlusionTexCoord: 0
+          emissiveTexCoord: 0
+          normalTexCoord: 0
+          name: ""
+        textureRect: [0, 0.286031, 0.141907, 0.141907]
+        primitiveType: triangles
+        vertexCount: 0
+        faceCulling: false
+        textureShadow: true
+        hasTexCoord1: true
+        hasTexCoord2: false
+        hasNormalMap: false
+        hasTangent: true
+        hasVertexColor3: false
+        hasVertexColor4: true
+        hasTextureRect: true
+        hasSkinning: false
+        hasMorphTarget: false
+        hasMorphNormal: false
+        hasMorphTangent: false
+    normAdjustJoint: 1
+    normAdjustWeight: 1
+    morphWeights: [0, 0, 0, 0, 0, 0, 0, 0]
+    aabb:
+      min: [-64, 0, 0]
+      max: [64, 128, 0]
+    verticesAABB:
+      min: [-64, 0, 0]
+      max: [64, 128, 0]
+    worldAABB:
+      min: [-64, 0, 0]
+      max: [64, 128, 0]
+    receiveLights: false
+    receiveIBL: false
+    castShadows: false
+    receiveShadows: false
+    lodEnabled: true
+    lodBias: 1
+    renderInReflectionProbes: true
+    shadowsBillboard: false
+    transparent: true
+    cullingMode: back
+    windingOrder: ccw
+  sprite:
+    width: 128
+    height: 128
+    automaticFlipY: true
+    flipY: true
+    textureScaleFactor: 0.5
+    pivotPreset: bottom_center
+    framesRect:
+      - name: idle
+        rect: [0, 258, 128, 128]
+      - name: walk_a
+        rect: [258, 258, 128, 128]
+      - name: walk_b
+        rect: [387, 258, 128, 128]
+      - name: jump
+        rect: [129, 258, 128, 128]
+      - name: hit
+        rect: [774, 129, 128, 128]
+      - name: duck
+        rect: [516, 129, 128, 128]
+      - name: front
+        rect: [645, 129, 128, 128]
+  script:
+    scripts:
+      - type: cpp
+        path: scripts/PlayerController.cpp
+        headerPath: scripts/PlayerController.h
+        className: PlayerController
+        enabled: true
+        properties:
+          - name: moveSpeed
+            displayName: Move Speed
+            type: Float
+            value: 380
+            defaultValue: 380
+          - name: jumpSpeed
+            displayName: Jump Speed
+            type: Float
+            value: 900
+            defaultValue: 900
+          - name: maxFallSpeed
+            displayName: Max Fall Speed
+            type: Float
+            value: 1400
+            defaultValue: 1400
+          - name: coyoteTime
+            displayName: Coyote Time
+            type: Float
+            value: 0.12
+            defaultValue: 0.12
+          - name: jumpBufferTime
+            displayName: Jump Buffer
+            type: Float
+            value: 0.15
+            defaultValue: 0.15
+          - name: hurtInvulnerability
+            displayName: Hurt Invulnerability
+            type: Float
+            value: 1.5
+            defaultValue: 1.5
+          - name: stompBounce
+            displayName: Stomp Bounce
+            type: Float
+            value: 520
+            defaultValue: 520
+          - name: walkFrameTime
+            displayName: Walk Frame Time
+            type: Float
+            value: 0.14
+            defaultValue: 0.14
+          - name: colliderWidth
+            displayName: Collider Width
+            type: Float
+            value: 56
+            defaultValue: 56
+          - name: fallDeathY
+            displayName: Fall Death Y
+            type: Float
+            value: -200
+            defaultValue: -200
+  body2d:
+    type: dynamic
+    numShapes: 1
+    shapes:
+      - type: polygon
+        pointA: [-22, 8]
+        pointB: [22, 90]
+        radius: 6
+        loop: false
+        density: 1
+        friction: 0
+        restitution: 0
+        sensor: false
+        enableHitEvents: false
+        contactEvents: true
+        preSolveEvents: false
+        sensorEvents: true
+        categoryBits: 2
+        maskBits: 65535
+        groupIndex: 0
+        vertices:
+          - [-22, 8]
+          - [22, 8]
+          - [22, 90]
+          - [-22, 90]
+children:
+  - type: Entity
+    entity: 102
+    name: Dust
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      points:
+        maxPoints: 12
+        transparent: true
+        autoTransparency: false
+        texture:
+          textureType: 2D
+          source: path
+          path: particles/dust.png
+          minFilter: linear
+          magFilter: linear
+          wrapU: clamp_to_edge
+          wrapV: clamp_to_edge
+          releaseDataAfterLoad: true
+  - type: Entity
+    entity: 103
+    name: Dust Emitter
+    components:
+      transform:
+        position: [0, 0, 0]
+        rotation: [1, 0, 0, 0]
+        scale: [1, 1, 1]
+        worldPosition: [0, 0, 0]
+        worldRotation: [1, 0, 0, 0]
+        worldScale: [1, 1, 1]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        visible: true
+        billboardRotation: [1, 0, 0, 0]
+        billboard: false
+        fakeBillboard: false
+        cylindricalBillboard: false
+      action:
+        state: Stopped
+        speed: 1
+        target: 102
+        ownedTarget: false
+      particles:
+        maxParticles: 12
+        emitter: true
+        loop: false
+        localSpace: false
+        rate: 0
+        maxPerUpdate: 12
+        bursts:
+          - time: 0
+            minCount: 8
+            maxCount: 10
+        lifeInitializer:
+          minLife: 0.35
+          maxLife: 0.5
+        positionInitializer:
+          shape: Box
+          minPosition: [-26, 0, 0]
+          maxPosition: [26, 8, 0]
+        velocityInitializer:
+          minVelocity: [-150, 10, 0]
+          maxVelocity: [150, 50, 0]
+        colorInitializer:
+          minColor: [0.88, 0.82, 0.72]
+          maxColor: [0.96, 0.91, 0.83]
+          useSRGB: true
+        alphaInitializer:
+          minAlpha: 0.9
+          maxAlpha: 1
+        alphaModifier:
+          fromTime: 0
+          toTime: 0.5
+          fromAlpha: 1
+          toAlpha: 0
+          function: LINEAR
+        sizeInitializer:
+          minSize: 22
+          maxSize: 28
+        sizeModifier:
+          fromTime: 0
+          toTime: 0.5
+          fromSize: 24
+          toSize: 48
+          function: LINEAR
