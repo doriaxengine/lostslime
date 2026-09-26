@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   build:
-    uses: doriaxengine/doriax-project-example-ci/.github/workflows/build-project.yml@v1
+    uses: doriaxengine/doriax-project-example-ci/.github/workflows/build-project.yml@v2
     with:
       title: Lost Slime
       subtitle: Grab the key, stomp slimes and bees and reach the exit door.
