@@ -1024,7 +1024,7 @@ entities:
         anchorOffsetTop: -128
         anchorOffsetRight: 128
         anchorOffsetBottom: 0
-        positionOffset: [28, -28]
+        positionOffset: [28, -152]
         anchorPreset: BOTTOM_LEFT
         usingAnchors: true
         panel: 0
@@ -1119,7 +1119,7 @@ entities:
         anchorOffsetTop: -128
         anchorOffsetRight: 128
         anchorOffsetBottom: 0
-        positionOffset: [176, -28]
+        positionOffset: [176, -152]
         anchorPreset: BOTTOM_LEFT
         usingAnchors: true
         panel: 0
@@ -1214,7 +1214,7 @@ entities:
         anchorOffsetTop: -104
         anchorOffsetRight: 104
         anchorOffsetBottom: 0
-        positionOffset: [114, -176]
+        positionOffset: [114, -28]
         anchorPreset: BOTTOM_LEFT
         usingAnchors: true
         panel: 0
