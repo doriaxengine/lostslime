@@ -49,16 +49,18 @@ void LoadingScreen::onUpdate() {
     if (!active) {
         active = true;
         timer = 0.0f;
+        barProgress = 0.0f;
         shownDots = -1;
         if (titleText) titleText->setText(GameState::loadingTitle);
     }
 
     float dt = (float)Engine::getDeltatime();
+    // the first frame after the switch carries its freeze
+    float step = std::min(dt, 1.0f / 30.0f);
     timer += dt;
 
     if (holding) {
-        // the first frame after the switch carries its freeze
-        fadeTimer += std::min(dt, 1.0f / 30.0f);
+        fadeTimer += step;
         float alpha = (fadeOut > 0.0f) ? 1.0f - fadeTimer / fadeOut : 0.0f;
         setAlpha(std::max(0.0f, alpha));
         if (alpha <= 0.0f) {
@@ -82,6 +84,7 @@ void LoadingScreen::onUpdate() {
     }
 
     if (barFill) {
-        barFill->setWidth((unsigned int)std::max(1.0f, barWidth * SceneManager::getLoadingProgress()));
+        barProgress += (SceneManager::getLoadingProgress() - barProgress) * std::min(1.0f, step * 12.0f);
+        barFill->setWidth((unsigned int)std::max(1.0f, barWidth * barProgress));
     }
 }

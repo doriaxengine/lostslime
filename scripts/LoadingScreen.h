@@ -47,5 +47,6 @@ private:
     bool holding = false;
     float timer = 0.0f;
     float fadeTimer = 0.0f;
+    float barProgress = 0.0f;
     int shownDots = -1;
 };
