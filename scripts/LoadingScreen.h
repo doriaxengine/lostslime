@@ -31,15 +31,21 @@ public:
     DPROPERTY("Coin Size")
     float coinSize = 64.0f;
 
+    DPROPERTY("Fade Out")
+    float fadeOut = 0.3f;
+
     LoadingScreen(doriax::Scene* scene, doriax::Entity entity);
     virtual ~LoadingScreen();
 
     void onUpdate();
+    void onSceneLoaded();
 
 private:
     void setAlpha(float alpha);
 
     bool active = false;
+    bool holding = false;
     float timer = 0.0f;
+    float fadeTimer = 0.0f;
     int shownDots = -1;
 };

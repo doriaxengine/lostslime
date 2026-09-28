@@ -41,6 +41,7 @@ public:
     virtual ~LevelController();
 
     void onUpdate();
+    void onSceneLoaded();
     void onKeyDown(int key, bool repeat, int mods);
     void onGamepadButtonDown(int id, int button);
 

@@ -20,15 +20,15 @@
 using namespace doriax;
 
 LevelController::LevelController(Scene* scene, Entity entity): ScriptBase(scene, entity) {
-    GameState::configureTransitions();
-
     REGISTER_ENGINE_EVENT(onUpdate);
+    REGISTER_ENGINE_EVENT(onSceneLoaded);
     REGISTER_ENGINE_EVENT(onKeyDown);
     REGISTER_ENGINE_EVENT(onGamepadButtonDown);
 }
 
 LevelController::~LevelController() {
     UNREGISTER_ENGINE_EVENT(onUpdate);
+    UNREGISTER_ENGINE_EVENT(onSceneLoaded);
     UNREGISTER_ENGINE_EVENT(onKeyDown);
     UNREGISTER_ENGINE_EVENT(onGamepadButtonDown);
 }
@@ -137,12 +137,13 @@ void LevelController::updateCamera(float dt, bool snap) {
     }
 }
 
+// starts behind the loading screen fading out
+void LevelController::onSceneLoaded() {
+    if (!started) start();
+}
+
 void LevelController::onUpdate() {
-    if (!started) {
-        // wait for the loading screen to go
-        if (SceneManager::isLoading()) return;
-        start();
-    }
+    if (!started) return;
 
     float dt = Engine::getDeltatime();
 

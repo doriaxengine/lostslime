@@ -18,6 +18,10 @@ application:
   identifier: org.doriax.lostslime
   version: 1.0.0
 startSceneId: 2
+loading:
+  sceneId: 9
+  delay: 0.4
+  asyncLoading: true
 scenes:
   - filepath: Intro Scene.scene
   - filepath: Level One.scene

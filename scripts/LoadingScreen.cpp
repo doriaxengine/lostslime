@@ -13,10 +13,13 @@ using namespace doriax;
 
 LoadingScreen::LoadingScreen(Scene* scene, Entity entity): ScriptBase(scene, entity) {
     REGISTER_ENGINE_EVENT(onUpdate);
+    REGISTER_ENGINE_EVENT(onSceneLoaded);
 }
 
 LoadingScreen::~LoadingScreen() {
     UNREGISTER_ENGINE_EVENT(onUpdate);
+    UNREGISTER_ENGINE_EVENT(onSceneLoaded);
+    if (holding) SceneManager::releaseLoading();
 }
 
 void LoadingScreen::setAlpha(float alpha) {
@@ -26,6 +29,14 @@ void LoadingScreen::setAlpha(float alpha) {
     if (coin) coin->setAlpha(alpha);
     if (bar) bar->setAlpha(alpha * 0.15f);
     if (barFill) barFill->setAlpha(alpha);
+}
+
+// stays up to fade out
+void LoadingScreen::onSceneLoaded() {
+    if (holding || !Engine::isSceneRunning(scene)) return;
+
+    holding = SceneManager::holdLoading();
+    fadeTimer = 0.0f;
 }
 
 void LoadingScreen::onUpdate() {
@@ -42,10 +53,22 @@ void LoadingScreen::onUpdate() {
         if (titleText) titleText->setText(GameState::loadingTitle);
     }
 
-    timer += (float)Engine::getDeltatime();
+    float dt = (float)Engine::getDeltatime();
+    timer += dt;
 
-    float delay = SceneManager::getLoadingDelay();
-    setAlpha(delay > 0.0f ? std::min(1.0f, timer / delay) : 1.0f);
+    if (holding) {
+        // the first frame after the switch carries its freeze
+        fadeTimer += std::min(dt, 1.0f / 30.0f);
+        float alpha = (fadeOut > 0.0f) ? 1.0f - fadeTimer / fadeOut : 0.0f;
+        setAlpha(std::max(0.0f, alpha));
+        if (alpha <= 0.0f) {
+            holding = false;
+            SceneManager::releaseLoading();
+        }
+    } else {
+        float delay = SceneManager::getLoadingDelay();
+        setAlpha(delay > 0.0f ? std::min(1.0f, timer / delay) : 1.0f);
+    }
 
     int dots = (int)(timer * 3.0f) % 4;
     if (statusText && dots != shownDots) {

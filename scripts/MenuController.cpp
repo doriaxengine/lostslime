@@ -10,8 +10,6 @@
 using namespace doriax;
 
 MenuController::MenuController(Scene* scene, Entity entity): ScriptBase(scene, entity) {
-    GameState::configureTransitions();
-
     REGISTER_ENGINE_EVENT(onUpdate);
     REGISTER_ENGINE_EVENT(onKeyDown);
     REGISTER_ENGINE_EVENT(onGamepadButtonDown);

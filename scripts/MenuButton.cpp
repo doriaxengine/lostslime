@@ -39,7 +39,7 @@ void MenuButton::onPress() {
 }
 
 void MenuButton::runAction(Scene* scene, const std::string& action, const std::string& targetScene) {
-    // this scene still gets input under the loading screen
+    // keys still reach this scene under the loading screen
     if (SceneManager::isLoading()) return;
 
     playSound(scene, "Select Sound");

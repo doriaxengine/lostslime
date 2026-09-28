@@ -51,7 +51,6 @@ struct GameState {
     static void newGame();
     static void beginLevel(const std::string& sceneName, const std::string& displayName, const std::string& next);
 
-    static void configureTransitions();
     static void loadScene(const std::string& sceneName);
 
     static void shake(float seconds, float strength);

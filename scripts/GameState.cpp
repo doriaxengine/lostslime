@@ -1,6 +1,5 @@
 #include "GameState.h"
 
-#include "Engine.h"
 #include "System.h"
 #include "SceneManager.h"
 #include "Sound.h"
@@ -51,13 +50,6 @@ void GameState::newGame(){
     resumeRequested = false;
     respawnRequested = false;
     pauseRequested = false;
-}
-
-void GameState::configureTransitions(){
-    Engine::setAsyncLoading(true);
-    SceneManager::setLoadingScene("Loading Scene");
-    // lets the menu click finish before the old scene goes
-    SceneManager::setLoadingDelay(0.4f);
 }
 
 void GameState::loadScene(const std::string& sceneName){
