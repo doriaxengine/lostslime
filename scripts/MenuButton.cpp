@@ -11,27 +11,12 @@ using namespace doriax;
 
 MenuButton::MenuButton(Scene* scene, Entity entity): Button(scene, entity) {
     REGISTER_BUTTON_EVENT(onPress, onPress);
-    REGISTER_UI_EVENT(onPointerEnter, onPointerEnter);
-    REGISTER_UI_EVENT(onPointerLeave, onPointerLeave);
-
-    // the hover scale grows the button from its center
-    setPivot(0.5f, 0.5f);
 }
 
 MenuButton::~MenuButton() {
     if (scene && scene->isEntityCreated(entity)) {
         UNREGISTER_BUTTON_EVENT(onPress, onPress);
-        UNREGISTER_UI_EVENT(onPointerEnter, onPointerEnter);
-        UNREGISTER_UI_EVENT(onPointerLeave, onPointerLeave);
     }
-}
-
-void MenuButton::onPointerEnter(float, float) {
-    setScale(1.05f);
-}
-
-void MenuButton::onPointerLeave(float, float) {
-    setScale(1.0f);
 }
 
 void MenuButton::onPress() {

@@ -17,7 +17,7 @@ public:
     doriax::Text* statusText = nullptr;
 
     DPROPERTY("Coin")
-    doriax::Image* coin = nullptr;
+    doriax::Image* coin = nullptr;   // spins with its Coin Spin action
 
     DPROPERTY("Bar")
     doriax::Image* bar = nullptr;
@@ -27,9 +27,6 @@ public:
 
     DPROPERTY("Bar Width")
     float barWidth = 360.0f;
-
-    DPROPERTY("Coin Size")
-    float coinSize = 64.0f;
 
     DPROPERTY("Fade Out")
     float fadeOut = 0.3f;

@@ -7,7 +7,6 @@
 #include "util/FunctionSubscribe.h"
 
 #include <algorithm>
-#include <cmath>
 
 using namespace doriax;
 
@@ -76,11 +75,6 @@ void LoadingScreen::onUpdate() {
     if (statusText && dots != shownDots) {
         shownDots = dots;
         statusText->setText("LOADING" + std::string(dots, '.'));
-    }
-
-    if (coin) {
-        float width = coinSize * std::fabs(std::cos(timer * 4.0f));
-        coin->setWidth((unsigned int)std::max(1.0f, width));
     }
 
     if (barFill) {

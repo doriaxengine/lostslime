@@ -2,11 +2,8 @@
 
 #include "GameState.h"
 
-#include "Engine.h"
 #include "Body2D.h"
 #include "util/FunctionSubscribe.h"
-
-#include <cmath>
 
 using namespace doriax;
 
@@ -18,25 +15,17 @@ Collectible::~Collectible() {
     UNREGISTER_ENGINE_EVENT(onUpdate);
 }
 
+// the bob is the Bob action of the bundle
 void Collectible::onUpdate() {
-    if (GameState::paused) return;
+    if (GameState::paused || started) return;
 
-    if (!started) {
-        // the editor reuses the entities when replaying
-        started = true;
-        collected = false;
-        basePosition = getPosition();
-        setVisible(true);
-        if (ensureBody2D(getScene(), getEntity())) {
-            getBody2D().setEnabled(true);
-        }
+    // the editor reuses the entities when replaying
+    started = true;
+    collected = false;
+    setVisible(true);
+    if (ensureBody2D(getScene(), getEntity())) {
+        getBody2D().setEnabled(true);
     }
-
-    if (collected) return;
-
-    time += Engine::getDeltatime();
-    float offset = std::sin(time * bobSpeed + basePosition.x * 0.01f) * bobHeight;
-    setPosition(basePosition.x, basePosition.y + offset, basePosition.z);
 }
 
 void Collectible::collect() {

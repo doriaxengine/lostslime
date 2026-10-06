@@ -38,6 +38,11 @@ maxValues:
   maxExternalBuffers: 0
   maxSpriteFrames: 7
   maxBones: 128
+  maxShapes2D: 8
+  maxShapePoints2D: 4
+  maxShapes3D: 0
+  maxShapeVertices3D: 0
+  maxShapeIndices3D: 0
 shaderKeys:
   - type: points
     properties: 5
@@ -90,24 +95,10 @@ cppScripts:
         isPtr: false
       - name: scoreValue
         isPtr: false
-      - name: bobHeight
-        isPtr: false
-      - name: bobSpeed
-        isPtr: false
   - path: scripts/Enemy.cpp
     headerPath: scripts/Enemy.h
     className: Enemy
     properties:
-      - name: speed
-        isPtr: false
-      - name: patrolDistance
-        isPtr: false
-      - name: flying
-        isPtr: false
-      - name: hoverHeight
-        isPtr: false
-      - name: hoverSpeed
-        isPtr: false
       - name: canStomp
         isPtr: false
       - name: stompHeight
@@ -134,8 +125,6 @@ cppScripts:
         isPtr: false
       - name: stompBounce
         isPtr: false
-      - name: walkFrameTime
-        isPtr: false
       - name: colliderWidth
         isPtr: false
       - name: fallDeathY
@@ -150,6 +139,13 @@ bundles:
   - bundles/Slime.bundle
   - bundles/Sounds.bundle
 entities:
+  - type: Entity
+    entity: 1003
+    name: Sounds
+    components:
+      bundle:
+        name: Sounds
+        path: bundles/Sounds.bundle
   - type: Entity
     entity: 1001
     name: Level
@@ -208,13 +204,6 @@ entities:
                 ptrTypeName: doriax::Object
                 value: 1002
                 defaultValue: 0
-  - type: Entity
-    entity: 1003
-    name: Sounds
-    components:
-      bundle:
-        name: Sounds
-        path: bundles/Sounds.bundle
   - type: Entity
     entity: 1004
     name: Background
@@ -277,7 +266,6 @@ entities:
             hasMorphTangent: false
         normAdjustJoint: 1
         normAdjustWeight: 1
-        morphWeights: [0, 0, 0, 0, 0, 0, 0, 0]
         aabb:
           min: [0, 0, 0]
           max: [2816, 1024, 0]
@@ -601,7 +589,6 @@ entities:
             hasMorphTangent: false
         normAdjustJoint: 1
         normAdjustWeight: 1
-        morphWeights: [0, 0, 0, 0, 0, 0, 0, 0]
         aabb:
           min: [0, 0, 0]
           max: [4096, 512, 0]

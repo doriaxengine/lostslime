@@ -10,6 +10,7 @@
 #include "Object.h"
 #include "Ray.h"
 #include "Particles.h"
+#include "Action.h"
 #include "SceneManager.h"
 #include "PhysicsSystem.h"
 #include "util/FunctionSubscribe.h"
@@ -23,6 +24,7 @@ PlayerController::PlayerController(Scene* scene, Entity entity): Sprite(scene, e
     physics = scene->getSystem<PhysicsSystem>().get();
 
     REGISTER_ENGINE_EVENT(onUpdate);
+    REGISTER_ENGINE_EVENT(onPostUpdate);
     REGISTER_ENGINE_EVENT(onFixedUpdate);
     REGISTER_ENGINE_EVENT(onKeyDown);
     REGISTER_ENGINE_EVENT(onKeyUp);
@@ -36,6 +38,7 @@ PlayerController::PlayerController(Scene* scene, Entity entity): Sprite(scene, e
 
 PlayerController::~PlayerController() {
     UNREGISTER_ENGINE_EVENT(onUpdate);
+    UNREGISTER_ENGINE_EVENT(onPostUpdate);
     UNREGISTER_ENGINE_EVENT(onFixedUpdate);
     UNREGISTER_ENGINE_EVENT(onKeyDown);
     UNREGISTER_ENGINE_EVENT(onKeyUp);
@@ -269,17 +272,32 @@ void PlayerController::fallOut() {
     }
     playSound(getScene(), "Hurt Sound");
     invulnerableTimer = hurtInvulnerability;
+    setBlinking(true);
     GameState::respawnRequested = true;
 }
 
-void PlayerController::applyFrame(const std::string& name) {
-    setFrame(name);
+void PlayerController::applyFacing() {
     Rect rect = getTextureRect();
-    if (!facingRight && rect.getWidth() > 0.0f) {
+    if (rect.getWidth() != 0.0f && (rect.getWidth() < 0.0f) == facingRight) {
         // mirror by sampling the frame right to left
         setTextureRect(Rect(rect.getX() + rect.getWidth(), rect.getY(), -rect.getWidth(), rect.getHeight()));
     }
-    currentFrame = name;
+}
+
+// the Hurt Blink action while invulnerable
+void PlayerController::setBlinking(bool blinking) {
+    if (hurtBlink == NULL_ENTITY) {
+        hurtBlink = findAction(getScene(), getEntity(), "Hurt Blink");
+    }
+    if (hurtBlink != NULL_ENTITY) {
+        Action blink(getScene(), hurtBlink);
+        if (blinking) {
+            blink.restart();
+        } else {
+            blink.stop();
+        }
+    }
+    if (!blinking) setAlpha(1.0f);
 }
 
 void PlayerController::onUpdate() {
@@ -296,47 +314,50 @@ void PlayerController::onUpdate() {
 
     float dt = Engine::getDeltatime();
 
+    if (invulnerableTimer > 0.0f) {
+        invulnerableTimer = std::max(0.0f, invulnerableTimer - dt);
+        if (invulnerableTimer <= 0.0f) setBlinking(false);
+    }
+
+    pose = "idle";
     if (dead) {
         deathTimer += dt;
-        applyFrame("hit");
+        pose = "hit";
         if (deathTimer > 1.2f) {
             GameState::gameOverRequested = true;
         }
-        return;
-    }
-
-    if (invulnerableTimer > 0.0f) {
-        invulnerableTimer = std::max(0.0f, invulnerableTimer - dt);
-        bool blinkOn = std::fmod(invulnerableTimer, 0.2f) < 0.1f;
-        setAlpha(blinkOn ? 1.0f : 0.35f);
-    } else {
-        setAlpha(1.0f);
-    }
-
-    if (!ensureBody2D(getScene(), getEntity())) return;
-    Body2D body = getBody2D();
-    Vector2 velocity = body.getLinearVelocity();
-
-    std::string frame = "idle";
-    if (knockbackTimer > 0.0f) {
-        frame = "hit";
-    } else if (!grounded) {
-        frame = "jump";
-    } else if (downHeld && std::fabs(velocity.x) <= 20.0f) {
-        frame = "duck";
-    } else if (std::fabs(velocity.x) > 20.0f) {
-        animTimer += dt;
-        if (animTimer >= walkFrameTime) {
-            animTimer -= walkFrameTime;
-            walkFrame = (walkFrame + 1) % 2;
+    } else if (ensureBody2D(getScene(), getEntity())) {
+        Vector2 velocity = getBody2D().getLinearVelocity();
+        if (knockbackTimer > 0.0f) {
+            pose = "hit";
+        } else if (!grounded) {
+            pose = "jump";
+        } else if (downHeld && std::fabs(velocity.x) <= 20.0f) {
+            pose = "duck";
+        } else if (std::fabs(velocity.x) > 20.0f) {
+            pose = "walk";
         }
-        frame = walkFrame == 0 ? "walk_a" : "walk_b";
-    } else {
-        animTimer = 0.0f;
-        walkFrame = 0;
     }
 
-    applyFrame(frame);
+    // the walk cycle is the Walk sprite animation, the other poses one frame each
+    if (walkAnimation == NULL_ENTITY) {
+        walkAnimation = findAction(getScene(), getEntity(), "Walk");
+    }
+    if (walkAnimation != NULL_ENTITY) {
+        Action walk(getScene(), walkAnimation);
+        if (pose == "walk" && !walk.isRunning()) {
+            walk.start();
+        } else if (pose != "walk" && walk.isRunning()) {
+            walk.stop();
+        }
+    }
+}
+
+// after the walk animation has switched frames
+void PlayerController::onPostUpdate() {
+    if (GameState::paused) return;
+    if (pose != "walk") setFrame(pose);
+    applyFacing();
 }
 
 void PlayerController::hurt(float knockDirection) {
@@ -345,6 +366,7 @@ void PlayerController::hurt(float knockDirection) {
 
     GameState::lives = std::max(0, GameState::lives - 1);
     invulnerableTimer = hurtInvulnerability;
+    setBlinking(true);
     knockbackTimer = 0.25f;
 
     Body2D body = getBody2D();
@@ -361,7 +383,8 @@ void PlayerController::die() {
     if (dead || !ensureBody2D(getScene(), getEntity())) return;
     dead = true;
     deathTimer = 0.0f;
-    setAlpha(1.0f);
+    invulnerableTimer = 0.0f;
+    setBlinking(false);
     playSound(getScene(), "Hurt Sound");
 
     // no more contacts once dead, but keep falling

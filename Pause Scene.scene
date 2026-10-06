@@ -38,6 +38,11 @@ maxValues:
   maxExternalBuffers: 0
   maxSpriteFrames: 0
   maxBones: 0
+  maxShapes2D: 0
+  maxShapePoints2D: 0
+  maxShapes3D: 0
+  maxShapeVertices3D: 0
+  maxShapeIndices3D: 0
 shaderKeys:
   - type: ui
     properties: 2
@@ -58,6 +63,11 @@ cppScripts:
       - name: escapeAction
         isPtr: false
       - name: escapeScene
+        isPtr: false
+      - name: scoreText
+        isPtr: true
+        ptrTypeName: doriax::Text
+      - name: scorePrefix
         isPtr: false
   - path: scripts/MenuButton.cpp
     headerPath: scripts/MenuButton.h
@@ -102,6 +112,17 @@ entities:
                 type: String
                 value: Intro Scene
                 defaultValue: Intro Scene
+              - name: scoreText
+                displayName: Score Text
+                type: EntityReference
+                ptrTypeName: doriax::Text
+                value: 0
+                defaultValue: 0
+              - name: scorePrefix
+                displayName: Score Prefix
+                type: String
+                value: "Score: "
+                defaultValue: "Score: "
   - type: Entity
     entity: 1002
     name: Sounds
@@ -129,42 +150,14 @@ entities:
         fakeBillboard: false
         cylindricalBillboard: false
       ui:
-        buffer:
-          type: vertex_buffer
-          usage: immutable
-          stride: 0
-          size: 0
-          count: 0
-          renderAttributes: true
-          instanceBuffer: false
-          attributes: ~
-        indices:
-          type: index_buffer
-          usage: immutable
-          stride: 2
-          size: 0
-          count: 0
-          renderAttributes: true
-          instanceBuffer: false
-          attributes:
-            - type: index
-              dataType: unsigned_short
-              bufferName: ""
-              elements: 1
-              offset: 0
-              count: 0
-              normalized: true
-              perInstance: false
-        minBufferCount: 0
-        minIndicesCount: 0
         primitiveType: triangles
-        vertexCount: 0
+        vertexCount: 54
         aabb:
           min: [0, 0, 0]
-          max: [0, 0, 0]
+          max: [1280, 720, 0]
         worldAABB:
           min: [0, 0, 0]
-          max: [0, 0, 0]
+          max: [1280, 720, 0]
         texture: ~
         color: [0, 0, 0, 0.55]
         automaticFlipY: true
@@ -176,18 +169,19 @@ entities:
         height: 720
         anchorPointLeft: 0
         anchorPointTop: 0
-        anchorPointRight: 0
-        anchorPointBottom: 0
+        anchorPointRight: 1
+        anchorPointBottom: 1
         anchorOffsetLeft: 0
         anchorOffsetTop: 0
         anchorOffsetRight: 0
         anchorOffsetBottom: 0
         positionOffset: [0, 0]
+        pivot: [0, 0]
         anchorPreset: FULL_LAYOUT
         usingAnchors: true
         panel: 0
         containerBoxIndex: -1
-        scissor: [0, 0, 0, 0]
+        scissor: [0, 0, 1044, 621]
         ignoreScissor: false
         ignoreEvents: true
       image:
@@ -201,14 +195,14 @@ entities:
     name: Panel
     components:
       transform:
-        position: [0, 0, 0]
+        position: [330, 150, 0]
         rotation: [1, 0, 0, 0]
         scale: [1, 1, 1]
-        worldPosition: [0, 0, 0]
+        worldPosition: [330, 150, 0]
         worldRotation: [1, 0, 0, 0]
         worldScale: [1, 1, 1]
-        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
-        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [330, 150, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [330, 150, 0, 1]]
         normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
         visible: true
         billboardRotation: [1, 0, 0, 0]
@@ -216,42 +210,14 @@ entities:
         fakeBillboard: false
         cylindricalBillboard: false
       ui:
-        buffer:
-          type: vertex_buffer
-          usage: immutable
-          stride: 0
-          size: 0
-          count: 0
-          renderAttributes: true
-          instanceBuffer: false
-          attributes: ~
-        indices:
-          type: index_buffer
-          usage: immutable
-          stride: 2
-          size: 0
-          count: 0
-          renderAttributes: true
-          instanceBuffer: false
-          attributes:
-            - type: index
-              dataType: unsigned_short
-              bufferName: ""
-              elements: 1
-              offset: 0
-              count: 0
-              normalized: true
-              perInstance: false
-        minBufferCount: 0
-        minIndicesCount: 0
         primitiveType: triangles
-        vertexCount: 0
+        vertexCount: 54
         aabb:
           min: [0, 0, 0]
-          max: [0, 0, 0]
+          max: [620, 420, 0]
         worldAABB:
-          min: [0, 0, 0]
-          max: [0, 0, 0]
+          min: [330, 150, 0]
+          max: [950, 570, 0]
         texture:
           textureType: 2D
           source: path
@@ -269,20 +235,21 @@ entities:
       uilayout:
         width: 620
         height: 420
-        anchorPointLeft: 0
-        anchorPointTop: 0
-        anchorPointRight: 0
-        anchorPointBottom: 0
-        anchorOffsetLeft: 0
-        anchorOffsetTop: 0
-        anchorOffsetRight: 0
-        anchorOffsetBottom: 0
+        anchorPointLeft: 0.5
+        anchorPointTop: 0.5
+        anchorPointRight: 0.5
+        anchorPointBottom: 0.5
+        anchorOffsetLeft: -310
+        anchorOffsetTop: -210
+        anchorOffsetRight: 310
+        anchorOffsetBottom: 210
         positionOffset: [0, 0]
+        pivot: [0, 0]
         anchorPreset: CENTER
         usingAnchors: true
         panel: 0
         containerBoxIndex: -1
-        scissor: [0, 0, 0, 0]
+        scissor: [344, 164, 592, 392]
         ignoreScissor: false
         ignoreEvents: true
       image:
@@ -296,14 +263,14 @@ entities:
     name: Title
     components:
       transform:
-        position: [0, 0, 0]
+        position: [498, 198, 0]
         rotation: [1, 0, 0, 0]
         scale: [1, 1, 1]
-        worldPosition: [0, 0, 0]
+        worldPosition: [498, 198, 0]
         worldRotation: [1, 0, 0, 0]
         worldScale: [1, 1, 1]
-        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
-        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [498, 198, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [498, 198, 0, 1]]
         normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
         visible: true
         billboardRotation: [1, 0, 0, 0]
@@ -311,60 +278,41 @@ entities:
         fakeBillboard: false
         cylindricalBillboard: false
       ui:
-        buffer:
-          type: vertex_buffer
-          usage: immutable
-          stride: 0
-          size: 0
-          count: 0
-          renderAttributes: true
-          instanceBuffer: false
-          attributes: ~
-        indices:
-          type: index_buffer
-          usage: immutable
-          stride: 2
-          size: 0
-          count: 0
-          renderAttributes: true
-          instanceBuffer: false
-          attributes:
-            - type: index
-              dataType: unsigned_short
-              bufferName: ""
-              elements: 1
-              offset: 0
-              count: 0
-              normalized: true
-              perInstance: false
-        minBufferCount: 0
-        minIndicesCount: 0
         primitiveType: triangles
-        vertexCount: 0
+        vertexCount: 36
         aabb:
           min: [0, 0, 0]
-          max: [0, 0, 0]
+          max: [273, 49.77778, 0]
         worldAABB:
-          min: [0, 0, 0]
-          max: [0, 0, 0]
-        texture: ~
+          min: [498, 198, 0]
+          max: [771, 247.77777, 0]
+        texture:
+          textureType: 2D
+          source: id
+          id: fonts/KenneyFuture.ttf|64#7
+          minFilter: linear
+          magFilter: linear
+          wrapU: repeat
+          wrapV: repeat
+          releaseDataAfterLoad: false
         color: [0.16, 0.2, 0.3, 1]
         automaticFlipY: true
         flipY: false
         pointerMoved: false
         focused: false
       uilayout:
-        width: 0
-        height: 0
-        anchorPointLeft: 0
-        anchorPointTop: 0
-        anchorPointRight: 0
-        anchorPointBottom: 0
-        anchorOffsetLeft: 0
-        anchorOffsetTop: 0
-        anchorOffsetRight: 0
-        anchorOffsetBottom: 0
+        width: 284
+        height: 64
+        anchorPointLeft: 0.5
+        anchorPointTop: 0.5
+        anchorPointRight: 0.5
+        anchorPointBottom: 0.5
+        anchorOffsetLeft: -142
+        anchorOffsetTop: -32
+        anchorOffsetRight: 142
+        anchorOffsetBottom: 32
         positionOffset: [0, -130]
+        pivot: [0, 0]
         anchorPreset: CENTER
         usingAnchors: true
         panel: 0
@@ -387,14 +335,14 @@ entities:
     name: RESUME Button
     components:
       transform:
-        position: [0, 0, 0]
+        position: [490, 352, 0]
         rotation: [1, 0, 0, 0]
         scale: [1, 1, 1]
-        worldPosition: [0, 0, 0]
+        worldPosition: [490, 352, 0]
         worldRotation: [1, 0, 0, 0]
         worldScale: [1, 1, 1]
-        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
-        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [490, 352, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [490, 352, 0, 1]]
         normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
         visible: true
         billboardRotation: [1, 0, 0, 0]
@@ -402,42 +350,14 @@ entities:
         fakeBillboard: false
         cylindricalBillboard: false
       ui:
-        buffer:
-          type: vertex_buffer
-          usage: immutable
-          stride: 0
-          size: 0
-          count: 0
-          renderAttributes: true
-          instanceBuffer: false
-          attributes: ~
-        indices:
-          type: index_buffer
-          usage: immutable
-          stride: 2
-          size: 0
-          count: 0
-          renderAttributes: true
-          instanceBuffer: false
-          attributes:
-            - type: index
-              dataType: unsigned_short
-              bufferName: ""
-              elements: 1
-              offset: 0
-              count: 0
-              normalized: true
-              perInstance: false
-        minBufferCount: 0
-        minIndicesCount: 0
         primitiveType: triangles
-        vertexCount: 0
+        vertexCount: 54
         aabb:
           min: [0, 0, 0]
-          max: [0, 0, 0]
+          max: [300, 76, 0]
         worldAABB:
-          min: [0, 0, 0]
-          max: [0, 0, 0]
+          min: [490, 352, 0]
+          max: [790, 428, 0]
         texture:
           textureType: 2D
           source: path
@@ -494,24 +414,28 @@ entities:
         colorHovered: [0.9, 0.95, 1, 1]
         colorPressed: [0.75, 0.8, 0.85, 1]
         colorDisabled: [0.5, 0.5, 0.5, 1]
+        scaleHovered: 1.05
+        scalePressed: 1.02
+        transitionTime: 0.1
         disabled: false
       uilayout:
         width: 300
         height: 76
-        anchorPointLeft: 0
-        anchorPointTop: 0
-        anchorPointRight: 0
-        anchorPointBottom: 0
-        anchorOffsetLeft: 0
-        anchorOffsetTop: 0
-        anchorOffsetRight: 0
-        anchorOffsetBottom: 0
+        anchorPointLeft: 0.5
+        anchorPointTop: 0.5
+        anchorPointRight: 0.5
+        anchorPointBottom: 0.5
+        anchorOffsetLeft: -150
+        anchorOffsetTop: -38
+        anchorOffsetRight: 150
+        anchorOffsetBottom: 38
         positionOffset: [0, 30]
+        pivot: [0.5, 0.5]
         anchorPreset: CENTER
         usingAnchors: true
         panel: 0
         containerBoxIndex: -1
-        scissor: [0, 0, 0, 0]
+        scissor: [501.99997, 364, 276.00003, 48]
         ignoreScissor: false
         ignoreEvents: false
       image:
@@ -544,14 +468,14 @@ entities:
         name: Label
         components:
           transform:
-            position: [0, 0, 0]
+            position: [71, 15, 0]
             rotation: [1, 0, 0, 0]
             scale: [1, 1, 1]
-            worldPosition: [0, 0, 0]
+            worldPosition: [561, 367, 0]
             worldRotation: [1, 0, 0, 0]
             worldScale: [1, 1, 1]
-            localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
-            modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [71, 15, 0, 1]]
+            modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [561, 367, 0, 1]]
             normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
             visible: true
             billboardRotation: [1, 0, 0, 0]
@@ -559,65 +483,46 @@ entities:
             fakeBillboard: false
             cylindricalBillboard: false
           ui:
-            buffer:
-              type: vertex_buffer
-              usage: immutable
-              stride: 0
-              size: 0
-              count: 0
-              renderAttributes: true
-              instanceBuffer: false
-              attributes: ~
-            indices:
-              type: index_buffer
-              usage: immutable
-              stride: 2
-              size: 0
-              count: 0
-              renderAttributes: true
-              instanceBuffer: false
-              attributes:
-                - type: index
-                  dataType: unsigned_short
-                  bufferName: ""
-                  elements: 1
-                  offset: 0
-                  count: 0
-                  normalized: true
-                  perInstance: false
-            minBufferCount: 0
-            minIndicesCount: 0
             primitiveType: triangles
-            vertexCount: 0
+            vertexCount: 36
             aabb:
               min: [0, 0, 0]
-              max: [0, 0, 0]
+              max: [152, 26.444443, 0]
             worldAABB:
-              min: [0, 0, 0]
-              max: [0, 0, 0]
-            texture: ~
+              min: [561, 367, 0]
+              max: [713, 393.44446, 0]
+            texture:
+              textureType: 2D
+              source: id
+              id: fonts/KenneyFuture.ttf|34#13
+              minFilter: linear
+              magFilter: linear
+              wrapU: repeat
+              wrapV: repeat
+              releaseDataAfterLoad: false
             color: [1, 1, 1, 1]
             automaticFlipY: true
             flipY: false
             pointerMoved: false
             focused: false
           uilayout:
-            width: 0
-            height: 0
-            anchorPointLeft: 0
-            anchorPointTop: 0
-            anchorPointRight: 0
-            anchorPointBottom: 0
-            anchorOffsetLeft: 0
-            anchorOffsetTop: 0
-            anchorOffsetRight: 0
-            anchorOffsetBottom: 0
+            width: 158
+            height: 34
+            anchorPointLeft: 0.5
+            anchorPointTop: 0.5
+            anchorPointRight: 0.5
+            anchorPointBottom: 0.5
+            anchorOffsetLeft: -79
+            anchorOffsetTop: -17
+            anchorOffsetRight: 79
+            anchorOffsetBottom: 17
             positionOffset: [0, -4]
+            pivot: [0, 0]
             anchorPreset: CENTER
             usingAnchors: true
             panel: 0
             containerBoxIndex: -1
-            scissor: [0, 0, 0, 0]
+            scissor: [501.99997, 364, 276.00003, 48]
             ignoreScissor: false
             ignoreEvents: true
           text:
@@ -635,14 +540,14 @@ entities:
     name: MAIN MENU Button
     components:
       transform:
-        position: [0, 0, 0]
+        position: [490, 444, 0]
         rotation: [1, 0, 0, 0]
         scale: [1, 1, 1]
-        worldPosition: [0, 0, 0]
+        worldPosition: [490, 444, 0]
         worldRotation: [1, 0, 0, 0]
         worldScale: [1, 1, 1]
-        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
-        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+        localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [490, 444, 0, 1]]
+        modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [490, 444, 0, 1]]
         normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
         visible: true
         billboardRotation: [1, 0, 0, 0]
@@ -650,42 +555,14 @@ entities:
         fakeBillboard: false
         cylindricalBillboard: false
       ui:
-        buffer:
-          type: vertex_buffer
-          usage: immutable
-          stride: 0
-          size: 0
-          count: 0
-          renderAttributes: true
-          instanceBuffer: false
-          attributes: ~
-        indices:
-          type: index_buffer
-          usage: immutable
-          stride: 2
-          size: 0
-          count: 0
-          renderAttributes: true
-          instanceBuffer: false
-          attributes:
-            - type: index
-              dataType: unsigned_short
-              bufferName: ""
-              elements: 1
-              offset: 0
-              count: 0
-              normalized: true
-              perInstance: false
-        minBufferCount: 0
-        minIndicesCount: 0
         primitiveType: triangles
-        vertexCount: 0
+        vertexCount: 54
         aabb:
           min: [0, 0, 0]
-          max: [0, 0, 0]
+          max: [300, 76, 0]
         worldAABB:
-          min: [0, 0, 0]
-          max: [0, 0, 0]
+          min: [490, 444, 0]
+          max: [790, 520, 0]
         texture:
           textureType: 2D
           source: path
@@ -742,24 +619,28 @@ entities:
         colorHovered: [0.9, 0.95, 1, 1]
         colorPressed: [0.75, 0.8, 0.85, 1]
         colorDisabled: [0.5, 0.5, 0.5, 1]
+        scaleHovered: 1.05
+        scalePressed: 1.02
+        transitionTime: 0.1
         disabled: false
       uilayout:
         width: 300
         height: 76
-        anchorPointLeft: 0
-        anchorPointTop: 0
-        anchorPointRight: 0
-        anchorPointBottom: 0
-        anchorOffsetLeft: 0
-        anchorOffsetTop: 0
-        anchorOffsetRight: 0
-        anchorOffsetBottom: 0
+        anchorPointLeft: 0.5
+        anchorPointTop: 0.5
+        anchorPointRight: 0.5
+        anchorPointBottom: 0.5
+        anchorOffsetLeft: -150
+        anchorOffsetTop: -38
+        anchorOffsetRight: 150
+        anchorOffsetBottom: 38
         positionOffset: [0, 122]
+        pivot: [0.5, 0.5]
         anchorPreset: CENTER
         usingAnchors: true
         panel: 0
         containerBoxIndex: -1
-        scissor: [0, 0, 0, 0]
+        scissor: [501.99997, 456, 276.00003, 48]
         ignoreScissor: false
         ignoreEvents: false
       image:
@@ -792,14 +673,14 @@ entities:
         name: Label
         components:
           transform:
-            position: [0, 0, 0]
+            position: [46, 15, 0]
             rotation: [1, 0, 0, 0]
             scale: [1, 1, 1]
-            worldPosition: [0, 0, 0]
+            worldPosition: [536, 459, 0]
             worldRotation: [1, 0, 0, 0]
             worldScale: [1, 1, 1]
-            localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
-            modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
+            localMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [46, 15, 0, 1]]
+            modelMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [536, 459, 0, 1]]
             normalMatrix: [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]
             visible: true
             billboardRotation: [1, 0, 0, 0]
@@ -807,65 +688,46 @@ entities:
             fakeBillboard: false
             cylindricalBillboard: false
           ui:
-            buffer:
-              type: vertex_buffer
-              usage: immutable
-              stride: 0
-              size: 0
-              count: 0
-              renderAttributes: true
-              instanceBuffer: false
-              attributes: ~
-            indices:
-              type: index_buffer
-              usage: immutable
-              stride: 2
-              size: 0
-              count: 0
-              renderAttributes: true
-              instanceBuffer: false
-              attributes:
-                - type: index
-                  dataType: unsigned_short
-                  bufferName: ""
-                  elements: 1
-                  offset: 0
-                  count: 0
-                  normalized: true
-                  perInstance: false
-            minBufferCount: 0
-            minIndicesCount: 0
             primitiveType: triangles
-            vertexCount: 0
+            vertexCount: 54
             aabb:
               min: [0, 0, 0]
-              max: [0, 0, 0]
+              max: [203, 26.444443, 0]
             worldAABB:
-              min: [0, 0, 0]
-              max: [0, 0, 0]
-            texture: ~
+              min: [536, 459, 0]
+              max: [739, 485.44446, 0]
+            texture:
+              textureType: 2D
+              source: id
+              id: fonts/KenneyFuture.ttf|34#13
+              minFilter: linear
+              magFilter: linear
+              wrapU: repeat
+              wrapV: repeat
+              releaseDataAfterLoad: false
             color: [0.16, 0.2, 0.3, 1]
             automaticFlipY: true
             flipY: false
             pointerMoved: false
             focused: false
           uilayout:
-            width: 0
-            height: 0
-            anchorPointLeft: 0
-            anchorPointTop: 0
-            anchorPointRight: 0
-            anchorPointBottom: 0
-            anchorOffsetLeft: 0
-            anchorOffsetTop: 0
-            anchorOffsetRight: 0
-            anchorOffsetBottom: 0
+            width: 208
+            height: 34
+            anchorPointLeft: 0.5
+            anchorPointTop: 0.5
+            anchorPointRight: 0.5
+            anchorPointBottom: 0.5
+            anchorOffsetLeft: -104
+            anchorOffsetTop: -17
+            anchorOffsetRight: 104
+            anchorOffsetBottom: 17
             positionOffset: [0, -4]
+            pivot: [0, 0]
             anchorPreset: CENTER
             usingAnchors: true
             panel: 0
             containerBoxIndex: -1
-            scissor: [0, 0, 0, 0]
+            scissor: [501.99997, 456, 276.00003, 48]
             ignoreScissor: false
             ignoreEvents: true
           text:

@@ -7,20 +7,16 @@
 #include "Action.h"
 #include "util/FunctionSubscribe.h"
 
-#include <cmath>
-
 using namespace doriax;
 
 Enemy::Enemy(Scene* scene, Entity entity): Sprite(scene, entity) {
     REGISTER_ENGINE_EVENT(onUpdate);
     REGISTER_ENGINE_EVENT(onPostUpdate);
-    REGISTER_ENGINE_EVENT(onFixedUpdate);
 }
 
 Enemy::~Enemy() {
     UNREGISTER_ENGINE_EVENT(onUpdate);
     UNREGISTER_ENGINE_EVENT(onPostUpdate);
-    UNREGISTER_ENGINE_EVENT(onFixedUpdate);
 }
 
 void Enemy::applyFacing() {
@@ -35,36 +31,6 @@ void Enemy::applyFacing() {
     }
 }
 
-void Enemy::onFixedUpdate() {
-    if (GameState::paused || squashed) return;
-    if (!ensureBody2D(getScene(), getEntity())) return;
-
-    Body2D body = getBody2D();
-
-    if (!started) {
-        started = true;
-        // patrol around the bundle root
-        Vector3 rootPos = getWorldPosition() - getPosition();
-        origin = rootPos;
-        body.setPosition(Vector2(origin.x, origin.y));
-    }
-
-    float dt = Engine::getUpdateTime();
-    time += dt;
-
-    Vector3 pos = getWorldPosition();
-    if (movingRight && pos.x > origin.x + patrolDistance) movingRight = false;
-    if (!movingRight && pos.x < origin.x - patrolDistance) movingRight = true;
-
-    Vector2 velocity(movingRight ? speed : -speed, 0.0f);
-    if (flying) {
-        // kinematic body, so hover through the velocity
-        float targetY = origin.y + std::sin(time * hoverSpeed) * hoverHeight;
-        velocity.y = (targetY - pos.y) * 8.0f;
-    }
-    body.setLinearVelocity(velocity);
-}
-
 void Enemy::onUpdate() {
     if (GameState::paused) return;
 
@@ -76,9 +42,29 @@ void Enemy::onUpdate() {
     }
 }
 
-// after the animation has switched frames
+// after the actions have moved it and switched frames
 void Enemy::onPostUpdate() {
-    if (GameState::paused || squashed) return;
+    if (GameState::paused) return;
+
+    if (squashed) {
+        // flat frame, when the sheet has one
+        SpriteComponent& sprite = getComponent<SpriteComponent>();
+        for (unsigned int i = 0; i < sprite.numFramesRect; i++) {
+            if (sprite.framesRect[i].name == "flat") {
+                setFrame("flat");
+                applyFacing();
+                break;
+            }
+        }
+        return;
+    }
+
+    // faces where the patrol takes it
+    float x = getWorldPosition().x;
+    if (hasLastX && x != lastX) movingRight = x > lastX;
+    hasLastX = true;
+    lastX = x;
+
     applyFacing();
 }
 
@@ -93,17 +79,13 @@ void Enemy::squash() {
         body.setEnabled(false);
     }
 
-    // flat frame, when the sheet has one
-    Entity anim = getScene()->findEntity("Walk Animation", getEntity());
-    if (anim != NULL_ENTITY) {
-        Action(getScene(), anim).stop();
-    }
-    SpriteComponent& sprite = getComponent<SpriteComponent>();
-    for (unsigned int i = 0; i < sprite.numFramesRect; i++) {
-        if (sprite.framesRect[i].name == "flat") {
-            setFrame("flat");
-            applyFacing();
-            break;
+    // stays where it was squashed: its walk, patrol and hover stop
+    Entity parent = getComponent<Transform>().parent;
+    auto actions = getScene()->getComponentArray<ActionComponent>();
+    for (size_t i = 0; i < actions->size(); i++) {
+        Entity target = actions->getComponentFromIndex(i).target;
+        if (target == getEntity() || target == parent) {
+            Action(getScene(), actions->getEntity(i)).stop();
         }
     }
 }

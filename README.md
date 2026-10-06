@@ -28,6 +28,10 @@ touching the screen on any device, and hide again when a key is pressed.
 - `Loading Scene`: shown by `SceneManager` while a level loads.
 - `bundles/`: the player, enemies, pickups, door and the shared sounds.
 - `scripts/`: the C++ scripts. `GameState` keeps score, hearts and the key between scenes.
+- Animations: the pickups' bob and spin, the enemies' patrol and walk, the bee's hover, the
+  saw, the hero's walk cycle and hurt blink and the loading coin are actions of the bundles
+  and scenes (select them to see them in Properties). Scripts only start and stop the
+  hero's walk and blink. The menu buttons grow on hover through their Button settings.
 
 The best score is saved with `System::setIntegerForKey`.
 

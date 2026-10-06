@@ -101,6 +101,18 @@ void playSound(Scene* scene, const std::string& name){
     sound.play();
 }
 
+Entity findAction(Scene* scene, Entity target, const std::string& name){
+    if (!scene) return NULL_ENTITY;
+    auto actions = scene->getComponentArray<ActionComponent>();
+    for (size_t i = 0; i < actions->size(); i++){
+        Entity entity = actions->getEntity(i);
+        if (actions->getComponentFromIndex(i).target == target && scene->getEntityName(entity) == name){
+            return entity;
+        }
+    }
+    return NULL_ENTITY;
+}
+
 bool ensureBody2D(Scene* scene, Entity entity){
     if (!scene || entity == NULL_ENTITY || !scene->isEntityCreated(entity)) return false;
     Body2DComponent* body = scene->findComponent<Body2DComponent>(entity);

@@ -32,9 +32,6 @@ public:
     DPROPERTY("Stomp Bounce")
     float stompBounce = 520.0f;
 
-    DPROPERTY("Walk Frame Time")
-    float walkFrameTime = 0.14f;
-
     DPROPERTY("Collider Width")
     float colliderWidth = 56.0f;
 
@@ -45,6 +42,7 @@ public:
     virtual ~PlayerController();
 
     void onUpdate();
+    void onPostUpdate();
     void onFixedUpdate();
     void onKeyDown(int key, bool repeat, int mods);
     void onKeyUp(int key, bool repeat, int mods);
@@ -59,7 +57,8 @@ public:
     void respawn(doriax::Vector3 worldPosition);
 
 private:
-    void applyFrame(const std::string& name);
+    void applyFacing();
+    void setBlinking(bool blinking);
     void requestJump();
     void hurt(float knockDirection);
     void fallOut();
@@ -85,6 +84,9 @@ private:
     bool dropping = false;
     float dropTopY = 0.0f;
     doriax::Entity dustEmitter = NULL_ENTITY;
+    doriax::Entity walkAnimation = NULL_ENTITY;
+    doriax::Entity hurtBlink = NULL_ENTITY;
+    std::string pose = "idle";
     bool dead = false;
     bool jumpHeld = false;
     bool touchJump = false;
@@ -93,8 +95,5 @@ private:
     float jumpBufferTimer = 0.0f;
     float invulnerableTimer = 0.0f;
     float knockbackTimer = 0.0f;
-    float animTimer = 0.0f;
-    int walkFrame = 0;
     float deathTimer = 0.0f;
-    std::string currentFrame;
 };

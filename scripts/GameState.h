@@ -75,5 +75,8 @@ T* findScript(doriax::Scene* scene, doriax::Entity entity, const char* className
 // plays one of the Sounds bundle entities
 void playSound(doriax::Scene* scene, const std::string& name);
 
+// the action named name that animates target, or NULL_ENTITY
+doriax::Entity findAction(doriax::Scene* scene, doriax::Entity target, const std::string& name);
+
 // loads the Box2D body before the first physics step, false if there is none
 bool ensureBody2D(doriax::Scene* scene, doriax::Entity entity);

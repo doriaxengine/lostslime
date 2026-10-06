@@ -17,8 +17,6 @@ public:
     virtual ~MenuButton();
 
     void onPress();
-    void onPointerEnter(float x, float y);
-    void onPointerLeave(float x, float y);
 
     static void runAction(doriax::Scene* scene, const std::string& action, const std::string& targetScene);
 };
