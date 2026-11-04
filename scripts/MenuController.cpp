@@ -22,14 +22,40 @@ MenuController::~MenuController() {
 }
 
 void MenuController::onUpdate() {
+    // overlay scenes stay alive while hidden, so they arm again when shown
+    if (!Engine::isSceneRunning(scene)) {
+        armed = false;
+        armTimer = 0.0f;
+        return;
+    }
+
     // ignore the key press that brought the player here
     if (!armed) {
         armTimer += Engine::getDeltatime();
-        if (armTimer > 0.3f) armed = true;
+        if (armTimer > 0.3f) {
+            armed = true;
+            focusPrimaryButton();
+        }
     }
 
     if (scoreText) {
         scoreText->setText(scorePrefix + std::to_string(GameState::score) + "   Best: " + std::to_string(GameState::getBestScore()));
+    }
+}
+
+// keys and gamepads start on the button of the primary action
+void MenuController::focusPrimaryButton() {
+    auto scripts = scene->getComponentArray<ScriptComponent>();
+    for (size_t i = 0; i < scripts->size(); i++) {
+        for (auto& entry : scripts->getComponentFromIndex(i).scripts) {
+            if (entry.type == ScriptType::LUA || entry.className != "MenuButton" || !entry.instance) continue;
+
+            MenuButton* button = static_cast<MenuButton*>(entry.instance);
+            if (button->action == primaryAction) {
+                button->setFocus();
+                return;
+            }
+        }
     }
 }
 

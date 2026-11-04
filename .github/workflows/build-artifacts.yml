@@ -22,4 +22,5 @@ jobs:
         Jump [Space] [↑] [W]
         Drop [↓] + jump
         Pause [Esc] [P]
+        Menus [↑] [↓] [Enter] or gamepad
         On phones, use the on-screen buttons

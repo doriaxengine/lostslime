@@ -34,6 +34,8 @@ public:
     void onGamepadButtonDown(int id, int button);
 
 private:
+    void focusPrimaryButton();
+
     bool armed = false;
     float armTimer = 0.0f;
 };

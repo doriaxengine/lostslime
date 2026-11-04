@@ -15,6 +15,7 @@ Open the folder in Doriax Editor and press **Play** on `Intro Scene`.
 | Space / Up / W, gamepad A | Jump (let go early for a short hop) |
 | Down + Jump | Drop through a platform |
 | Esc / P, gamepad Start | Pause |
+| Arrows, gamepad d-pad or stick | Menu selection |
 | Enter, gamepad A | Menu confirm |
 
 On phones and tablets the level shows on-screen buttons instead. They also appear after
