@@ -620,42 +620,55 @@ entities:
           - name: bush
             submeshId: 0
             rect: [845, 65, 64, 64]
+            collision: false
           - name: cactus
             submeshId: 0
             rect: [910, 65, 64, 64]
+            collision: false
           - name: fence
             submeshId: 0
             rect: [585, 130, 64, 64]
+            collision: false
           - name: grass
             submeshId: 0
             rect: [455, 195, 64, 64]
+            collision: false
           - name: hill
             submeshId: 0
             rect: [650, 195, 64, 64]
+            collision: false
           - name: hill_top
             submeshId: 0
             rect: [715, 195, 64, 64]
+            collision: false
           - name: ladder_middle
             submeshId: 0
             rect: [780, 325, 64, 64]
+            collision: false
           - name: mushroom_red
             submeshId: 0
             rect: [455, 390, 64, 64]
+            collision: false
           - name: rock
             submeshId: 0
             rect: [585, 390, 64, 64]
+            collision: false
           - name: sign
             submeshId: 0
             rect: [845, 390, 64, 64]
+            collision: false
           - name: sign_exit
             submeshId: 0
             rect: [910, 390, 64, 64]
+            collision: false
           - name: snow
             submeshId: 0
             rect: [1105, 390, 64, 64]
+            collision: false
           - name: spikes
             submeshId: 0
             rect: [0, 455, 64, 64]
+            collision: false
           - name: terrain_grass_block
             submeshId: 0
             rect: [260, 585, 64, 64]
@@ -689,48 +702,63 @@ entities:
           - name: terrain_grass_cloud
             submeshId: 0
             rect: [910, 585, 64, 64]
+            collision: false
           - name: terrain_grass_cloud_background
             submeshId: 0
             rect: [975, 585, 64, 64]
+            collision: false
           - name: terrain_grass_cloud_left
             submeshId: 0
             rect: [1040, 585, 64, 64]
+            collision: false
           - name: terrain_grass_cloud_middle
             submeshId: 0
             rect: [1105, 585, 64, 64]
+            collision: false
           - name: terrain_grass_cloud_right
             submeshId: 0
             rect: [0, 650, 64, 64]
+            collision: false
           - name: terrain_grass_horizontal_left
             submeshId: 0
             rect: [65, 650, 64, 64]
+            collision: false
           - name: terrain_grass_horizontal_middle
             submeshId: 0
             rect: [130, 650, 64, 64]
+            collision: false
           - name: terrain_grass_horizontal_overhang_left
             submeshId: 0
             rect: [195, 650, 64, 64]
+            collision: false
           - name: terrain_grass_horizontal_overhang_right
             submeshId: 0
             rect: [260, 650, 64, 64]
+            collision: false
           - name: terrain_grass_horizontal_right
             submeshId: 0
             rect: [325, 650, 64, 64]
+            collision: false
           - name: terrain_grass_ramp_long_a
             submeshId: 0
             rect: [390, 650, 64, 64]
+            collision: false
           - name: terrain_grass_ramp_long_b
             submeshId: 0
             rect: [455, 650, 64, 64]
+            collision: false
           - name: terrain_grass_ramp_long_c
             submeshId: 0
             rect: [520, 650, 64, 64]
+            collision: false
           - name: terrain_grass_ramp_short_a
             submeshId: 0
             rect: [585, 650, 64, 64]
+            collision: false
           - name: terrain_grass_ramp_short_b
             submeshId: 0
             rect: [650, 650, 64, 64]
+            collision: false
           - name: terrain_grass_vertical_bottom
             submeshId: 0
             rect: [715, 650, 64, 64]
@@ -743,12 +771,15 @@ entities:
           - name: water
             submeshId: 0
             rect: [195, 1105, 64, 64]
+            collision: false
           - name: water_top
             submeshId: 0
             rect: [260, 1105, 64, 64]
+            collision: false
           - name: water_top_low
             submeshId: 0
             rect: [325, 1105, 64, 64]
+            collision: false
         tiles:
           - name: terrain_grass_horizontal_left
             rectId: 28
@@ -2315,9 +2346,31 @@ entities:
             position: [4032, 0]
             width: 64
             height: 64
+      body2d:
+        type: static
+        numShapes: 1
+        shapes:
+          - type: polygon
+            source: entity_tilemap
+            pointA: [0, 0]
+            pointB: [0, 0]
+            radius: 0
+            loop: false
+            density: 1
+            friction: 0.6
+            restitution: 0
+            sensor: false
+            enableHitEvents: false
+            contactEvents: false
+            preSolveEvents: false
+            sensorEvents: false
+            categoryBits: 1
+            maskBits: 65535
+            groupIndex: 0
+            vertices: ~
   - type: Entity
     entity: 1006
-    name: Terrain Collider 1
+    name: Platforms
     components:
       transform:
         position: [0, 0, 0]
@@ -2336,7 +2389,7 @@ entities:
         cylindricalBillboard: false
       body2d:
         type: static
-        numShapes: 8
+        numShapes: 3
         shapes:
           - type: polygon
             pointA: [2112, 448]
@@ -2401,111 +2454,6 @@ entities:
               - [1216, 384]
               - [1216, 448]
               - [1024, 448]
-          - type: polygon
-            pointA: [2816, 0]
-            pointB: [3392, 384]
-            radius: 0
-            loop: false
-            density: 1
-            friction: 0.6
-            restitution: 0
-            sensor: false
-            enableHitEvents: false
-            contactEvents: false
-            preSolveEvents: false
-            sensorEvents: false
-            categoryBits: 1
-            maskBits: 65535
-            groupIndex: 0
-            vertices:
-              - [2816, 0]
-              - [3392, 0]
-              - [3392, 384]
-              - [2816, 384]
-          - type: polygon
-            pointA: [0, 0]
-            pointB: [576, 320]
-            radius: 0
-            loop: false
-            density: 1
-            friction: 0.6
-            restitution: 0
-            sensor: false
-            enableHitEvents: false
-            contactEvents: false
-            preSolveEvents: false
-            sensorEvents: false
-            categoryBits: 1
-            maskBits: 65535
-            groupIndex: 0
-            vertices:
-              - [0, 0]
-              - [576, 0]
-              - [576, 320]
-              - [0, 320]
-          - type: polygon
-            pointA: [768, 0]
-            pointB: [1472, 320]
-            radius: 0
-            loop: false
-            density: 1
-            friction: 0.6
-            restitution: 0
-            sensor: false
-            enableHitEvents: false
-            contactEvents: false
-            preSolveEvents: false
-            sensorEvents: false
-            categoryBits: 1
-            maskBits: 65535
-            groupIndex: 0
-            vertices:
-              - [768, 0]
-              - [1472, 0]
-              - [1472, 320]
-              - [768, 320]
-          - type: polygon
-            pointA: [1664, 0]
-            pointB: [2624, 320]
-            radius: 0
-            loop: false
-            density: 1
-            friction: 0.6
-            restitution: 0
-            sensor: false
-            enableHitEvents: false
-            contactEvents: false
-            preSolveEvents: false
-            sensorEvents: false
-            categoryBits: 1
-            maskBits: 65535
-            groupIndex: 0
-            vertices:
-              - [1664, 0]
-              - [2624, 0]
-              - [2624, 320]
-              - [1664, 320]
-          - type: polygon
-            pointA: [3584, 0]
-            pointB: [4096, 320]
-            radius: 0
-            loop: false
-            density: 1
-            friction: 0.6
-            restitution: 0
-            sensor: false
-            enableHitEvents: false
-            contactEvents: false
-            preSolveEvents: false
-            sensorEvents: false
-            categoryBits: 1
-            maskBits: 65535
-            groupIndex: 0
-            vertices:
-              - [3584, 0]
-              - [4096, 0]
-              - [4096, 320]
-              - [3584, 320]
   - type: Entity
     entity: 1007
     name: Hazards 1
